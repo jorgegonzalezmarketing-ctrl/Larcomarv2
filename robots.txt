@@ -1,0 +1,6 @@
+# robots.txt — Larcomar Restaurante Peruano
+# TODO: reemplazar el dominio por el definitivo al publicar.
+User-agent: *
+Allow: /
+
+Sitemap: https://www.larcomar.cl/sitemap.xml
