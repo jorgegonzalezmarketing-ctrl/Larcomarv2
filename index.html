@@ -1405,10 +1405,13 @@ document.querySelectorAll('.reveal,.reveal-left,.reveal-right,.reveal-scale').fo
     imgs.forEach(function(img,i){img.classList.toggle('active',i===idx);});
   }
 
+  var canHover=window.matchMedia&&window.matchMedia('(hover:hover) and (pointer:fine)').matches;
   rows.forEach(function(row,idx){
     buildChars(row.querySelector('.hs-title'));
     row.addEventListener('mouseenter',function(){setActive(idx);});
     row.addEventListener('click',function(){
+      // En tactil: solo cambia el plato mostrado (animacion de galeria), sin abrir el lightbox
+      if(!canHover){ setActive(idx); return; }
       var src=row.getAttribute('data-src');
       var alt=row.getAttribute('data-alt');
       if(src&&typeof openLb==='function') openLb(src,alt||'');
