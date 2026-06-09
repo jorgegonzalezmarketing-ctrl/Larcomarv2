@@ -287,6 +287,8 @@ nav.scrolled .hamburger span{background:var(--brown)}
 .drk-col{overflow:hidden}
 .drk-col-inner{display:flex;flex-direction:column;gap:.85rem;animation:drkScroll linear infinite}
 .drk-col-inner.paused{animation-play-state:paused}
+/* En táctil las tarjetas no reciben touch: nunca se detiene el desplazamiento */
+@media(hover:none){.drk-cols-wrap{pointer-events:none}}
 .drk-card{background:rgba(255,255,255,.045);border:1px solid rgba(212,168,67,.13);border-radius:10px;padding:1.05rem 1.2rem;flex-shrink:0;transition:border-color .3s,background .3s}
 .drk-card:hover{border-color:rgba(212,168,67,.38);background:rgba(255,255,255,.08)}
 .drk-tag{display:inline-block;font-size:.58rem;letter-spacing:1.3px;text-transform:uppercase;font-weight:700;padding:.16rem .52rem;border-radius:20px;margin-bottom:.55rem;font-family:var(--font-body)}
@@ -1328,13 +1330,16 @@ function closeMob(){document.getElementById('mobileMenu').classList.remove('open
   go(0);
 })();
 
-// BEBIDAS — SCROLL COLUMNS PAUSE ON HOVER
-document.querySelectorAll('.drk-col').forEach(function(col){
-  var inner=col.querySelector('.drk-col-inner');
-  if(!inner) return;
-  col.addEventListener('mouseenter',function(){inner.classList.add('paused');});
-  col.addEventListener('mouseleave',function(){inner.classList.remove('paused');});
-});
+// BEBIDAS — SCROLL COLUMNS PAUSE ON HOVER (solo en dispositivos con mouse;
+// en táctil no se pausan para que las tarjetas nunca queden detenidas)
+if(window.matchMedia&&window.matchMedia('(hover:hover) and (pointer:fine)').matches){
+  document.querySelectorAll('.drk-col').forEach(function(col){
+    var inner=col.querySelector('.drk-col-inner');
+    if(!inner) return;
+    col.addEventListener('mouseenter',function(){inner.classList.add('paused');});
+    col.addEventListener('mouseleave',function(){inner.classList.remove('paused');});
+  });
+}
 
 // LIGHTBOX
 function openLb(src,alt){var lb=document.getElementById('lightbox'),img=document.getElementById('lightboxImg');img.src=src;img.alt=alt;lb.classList.add('open');document.body.style.overflow='hidden';}
