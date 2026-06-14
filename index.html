@@ -765,21 +765,79 @@ footer{background:var(--espresso);padding:4rem 8% 2rem}
 <!-- VINOS & CÓCTELES -->
 <section id="bebidas" aria-label="Vinos y Cócteles">
   <div class="beb-header reveal">
-    <div class="section-label">Bar &amp; Bodega</div>
-    <h2 class="section-title">Vinos &amp; <em style="color:var(--gold)">Bodega</em></h2>
-    <p class="section-subtitle">Piscos artesanales, pisco sours, chilcanos, macerados, cervezas y cócteles de autor ya viven dentro de nuestra carta. Para los vinos, descubre nuestra bodega completa.</p>
+    <div class="section-label">Bar &amp; Coctelería</div>
+    <h2 class="section-title">Vinos &amp; <em style="color:var(--gold)">Cócteles</em></h2>
+    <p class="section-subtitle">Pisco sours, chilcanos, macerados de autor y cócteles de la casa. La selección completa, con precios, está en nuestra carta.</p>
   </div>
 
-  <div class="drk-body reveal" style="text-align:center;max-width:640px;margin:0 auto">
-    <p style="color:rgba(251,245,232,.7);font-size:.96rem;line-height:1.8;margin-bottom:2.2rem">
-      Una cuidada selección de vinos chilenos —tintos, blancos y espumantes— pensada para acompañar cada plato. Pregunta a nuestro equipo por las sugerencias del día.
-    </p>
-    <div class="drk-cta-wrap" style="margin-top:0">
-      <a href="https://drive.google.com/drive/folders/1anC-DCo5oxV9e1NpX8cMBoMeqSh82FQz?usp=drive_link" id="drk-pdf-link" class="drk-cta-btn" target="_blank" rel="noopener">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-        Ver carta completa de vinos
+  <div class="drk-body reveal">
+    <div class="drk-cols-wrap" aria-hidden="true">
+
+      <!-- COLUMNA 1: Piscos & Sours -->
+      <div class="drk-col">
+        <div class="drk-col-inner" style="animation-duration:30s">
+          <div class="drk-card"><span class="drk-tag tag-pisco">Pisco</span><div class="drk-name">Pisco Sour Clásico</div><div class="drk-hint">Pisco, limón de pica y clara de huevo</div></div>
+          <div class="drk-card"><span class="drk-tag tag-pisco">Pisco</span><div class="drk-name">Pisco Sour de Sabores</div><div class="drk-hint">Maracuyá, frutilla o aguaymanto</div></div>
+          <div class="drk-card"><span class="drk-tag tag-pisco">Pisco</span><div class="drk-name">Pisco Sour Catedral</div><div class="drk-hint">Formato grande, para compartir</div></div>
+          <div class="drk-card"><span class="drk-tag tag-pisco">Chilcano</span><div class="drk-name">Chilcano Clásico</div><div class="drk-hint">Pisco, ginger ale, limón y angostura</div></div>
+          <div class="drk-card"><span class="drk-tag tag-coctel">Sour</span><div class="drk-name">Amaretto Sour</div><div class="drk-hint">Dulce, suave y aromático</div></div>
+          <div class="drk-card"><span class="drk-tag tag-coctel">Sour</span><div class="drk-name">Whisky Sour</div><div class="drk-hint">Whisky, limón y un toque de jarabe</div></div>
+          <!-- duplicado para loop continuo -->
+          <div class="drk-card"><span class="drk-tag tag-pisco">Pisco</span><div class="drk-name">Pisco Sour Clásico</div><div class="drk-hint">Pisco, limón de pica y clara de huevo</div></div>
+          <div class="drk-card"><span class="drk-tag tag-pisco">Pisco</span><div class="drk-name">Pisco Sour de Sabores</div><div class="drk-hint">Maracuyá, frutilla o aguaymanto</div></div>
+          <div class="drk-card"><span class="drk-tag tag-pisco">Pisco</span><div class="drk-name">Pisco Sour Catedral</div><div class="drk-hint">Formato grande, para compartir</div></div>
+          <div class="drk-card"><span class="drk-tag tag-pisco">Chilcano</span><div class="drk-name">Chilcano Clásico</div><div class="drk-hint">Pisco, ginger ale, limón y angostura</div></div>
+          <div class="drk-card"><span class="drk-tag tag-coctel">Sour</span><div class="drk-name">Amaretto Sour</div><div class="drk-hint">Dulce, suave y aromático</div></div>
+          <div class="drk-card"><span class="drk-tag tag-coctel">Sour</span><div class="drk-name">Whisky Sour</div><div class="drk-hint">Whisky, limón y un toque de jarabe</div></div>
+        </div>
+      </div>
+
+      <!-- COLUMNA 2: Coctelería -->
+      <div class="drk-col">
+        <div class="drk-col-inner" style="animation-duration:38s">
+          <div class="drk-card"><span class="drk-tag tag-coctel">Signature</span><div class="drk-name">Cóctel Larcomar</div><div class="drk-hint">La firma de nuestra barra peruana</div></div>
+          <div class="drk-card"><span class="drk-tag tag-coctel">Clásico</span><div class="drk-name">Algarrobina</div><div class="drk-hint">Cremoso clásico peruano con pisco</div></div>
+          <div class="drk-card"><span class="drk-tag tag-coctel">Clásico</span><div class="drk-name">Piña Colada</div><div class="drk-hint">Ron, leche de coco y piña natural</div></div>
+          <div class="drk-card"><span class="drk-tag tag-coctel">Clásico</span><div class="drk-name">Mojito Cubano</div><div class="drk-hint">Ron, hierbabuena fresca y limón</div></div>
+          <div class="drk-card"><span class="drk-tag tag-coctel">Especial</span><div class="drk-name">Machu Picchu</div><div class="drk-hint">Tropical en capas de colores</div></div>
+          <div class="drk-card"><span class="drk-tag tag-coctel">Clásico</span><div class="drk-name">Caipiriña</div><div class="drk-hint">Cachaça, lima y azúcar</div></div>
+          <!-- duplicado -->
+          <div class="drk-card"><span class="drk-tag tag-coctel">Signature</span><div class="drk-name">Cóctel Larcomar</div><div class="drk-hint">La firma de nuestra barra peruana</div></div>
+          <div class="drk-card"><span class="drk-tag tag-coctel">Clásico</span><div class="drk-name">Algarrobina</div><div class="drk-hint">Cremoso clásico peruano con pisco</div></div>
+          <div class="drk-card"><span class="drk-tag tag-coctel">Clásico</span><div class="drk-name">Piña Colada</div><div class="drk-hint">Ron, leche de coco y piña natural</div></div>
+          <div class="drk-card"><span class="drk-tag tag-coctel">Clásico</span><div class="drk-name">Mojito Cubano</div><div class="drk-hint">Ron, hierbabuena fresca y limón</div></div>
+          <div class="drk-card"><span class="drk-tag tag-coctel">Especial</span><div class="drk-name">Machu Picchu</div><div class="drk-hint">Tropical en capas de colores</div></div>
+          <div class="drk-card"><span class="drk-tag tag-coctel">Clásico</span><div class="drk-name">Caipiriña</div><div class="drk-hint">Cachaça, lima y azúcar</div></div>
+        </div>
+      </div>
+
+      <!-- COLUMNA 3: Macerados, Cervezas & Vinos -->
+      <div class="drk-col">
+        <div class="drk-col-inner" style="animation-duration:26s">
+          <div class="drk-card"><span class="drk-tag tag-macera">Macerado</span><div class="drk-name">Macerado de Coca</div><div class="drk-hint">Pisco macerado, sabor andino</div></div>
+          <div class="drk-card"><span class="drk-tag tag-macera">Macerado</span><div class="drk-name">Macerado de Aguaymanto</div><div class="drk-hint">Dulce y ácido a la vez</div></div>
+          <div class="drk-card"><span class="drk-tag tag-coctel">Para compartir</span><div class="drk-name">Sangría Larcomar</div><div class="drk-hint">Vino, frutas y especias de la casa</div></div>
+          <div class="drk-card"><span class="drk-tag tag-bar">Cerveza</span><div class="drk-name">Cusqueña</div><div class="drk-hint">Rubia, negra o de trigo</div></div>
+          <div class="drk-card"><span class="drk-tag tag-bar">Cerveza</span><div class="drk-name">Michelada</div><div class="drk-hint">Cerveza, limón y especias</div></div>
+          <div class="drk-card"><span class="drk-tag tag-tinto">Bodega</span><div class="drk-name">Vinos de la Casa</div><div class="drk-hint">Tintos, blancos y espumantes</div></div>
+          <!-- duplicado -->
+          <div class="drk-card"><span class="drk-tag tag-macera">Macerado</span><div class="drk-name">Macerado de Coca</div><div class="drk-hint">Pisco macerado, sabor andino</div></div>
+          <div class="drk-card"><span class="drk-tag tag-macera">Macerado</span><div class="drk-name">Macerado de Aguaymanto</div><div class="drk-hint">Dulce y ácido a la vez</div></div>
+          <div class="drk-card"><span class="drk-tag tag-coctel">Para compartir</span><div class="drk-name">Sangría Larcomar</div><div class="drk-hint">Vino, frutas y especias de la casa</div></div>
+          <div class="drk-card"><span class="drk-tag tag-bar">Cerveza</span><div class="drk-name">Cusqueña</div><div class="drk-hint">Rubia, negra o de trigo</div></div>
+          <div class="drk-card"><span class="drk-tag tag-bar">Cerveza</span><div class="drk-name">Michelada</div><div class="drk-hint">Cerveza, limón y especias</div></div>
+          <div class="drk-card"><span class="drk-tag tag-tinto">Bodega</span><div class="drk-name">Vinos de la Casa</div><div class="drk-hint">Tintos, blancos y espumantes</div></div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="drk-cta-wrap">
+      <a href="#menu" class="drk-cta-btn">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>
+        Ver toda la carta
       </a>
-      <p class="drk-note">Se abre en Google Drive · nueva pestaña</p>
+      <p class="drk-note">Cócteles, piscos, cervezas y bebidas — con precios — en la carta · <a href="https://drive.google.com/drive/folders/1anC-DCo5oxV9e1NpX8cMBoMeqSh82FQz?usp=drive_link" target="_blank" rel="noopener" style="color:var(--gold);text-decoration:underline">carta de vinos (PDF)</a></p>
     </div>
   </div>
 </section>
