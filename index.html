@@ -215,68 +215,96 @@ nav.scrolled .hamburger span{background:var(--brown)}
 .lb-close{position:absolute;top:20px;right:24px;background:none;border:none;color:#fff;font-size:2rem;cursor:pointer;opacity:.7;transition:.2s;line-height:1}
 .lb-close:hover{opacity:1}
 
-/* CARTA BOOK VIEWER */
-#menu{padding:6rem 4%;background:var(--warm-white)}
-.carta-head{text-align:center;margin-bottom:3rem}
-.carta-subtitle{color:var(--muted);font-size:.95rem;max-width:560px;margin:.8rem auto 0;line-height:1.7}
-.book-viewer{position:relative;display:flex;align-items:center;justify-content:center;gap:1.2rem;margin-bottom:1.2rem}
-.bv-arrow{background:var(--espresso);border:none;color:var(--gold);width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;transition:background .2s,transform .2s;box-shadow:0 4px 16px rgba(30,15,5,.2)}
-.bv-arrow:hover:not(:disabled){background:var(--burgundy);transform:scale(1.08)}
-.bv-arrow:disabled{opacity:.25;cursor:not-allowed}
-.bv-arrow svg{width:26px;height:26px}
-.bv-book{position:relative;display:flex;flex:1;max-width:1120px;height:700px;background:var(--cream);border-radius:3px 6px 6px 3px;box-shadow:-5px 5px 0 #d4c4a0,-10px 10px 0 #c4b08a,-15px 15px 0 #b8a07e,0 24px 70px rgba(30,15,5,.18);overflow:hidden;cursor:grab}
-.bv-book:active{cursor:grabbing}
-.bv-spine{position:absolute;left:50%;top:0;bottom:0;width:16px;transform:translateX(-50%);background:linear-gradient(90deg,#c0ad88,#eedcb2,#d6c49a,#eedcb2,#c0ad88);z-index:2;pointer-events:none;box-shadow:inset 0 0 8px rgba(30,15,5,.1)}
-.bv-page{flex:1;overflow-y:auto;background:var(--cream);height:100%;display:flex;flex-direction:column;transition:opacity .2s ease}
-.bv-page.fading{opacity:0}
-.mp-wrap{padding:2rem 2rem 1.5rem;display:flex;flex-direction:column;flex:1;min-height:0}
-.mp-items-block{flex:1}
-.mp-title{font-family:var(--font-display);font-size:1.55rem;color:var(--burgundy);text-align:center;margin-bottom:.4rem;letter-spacing:.5px}
-.mp-divider{display:flex;align-items:center;gap:.5rem;margin-bottom:1.2rem}
-.mp-divider::before,.mp-divider::after{content:'';flex:1;height:1px;background:var(--border)}
-.mp-divider span{font-size:.7rem;letter-spacing:2px;color:var(--amber);text-transform:uppercase;font-family:var(--font-body);white-space:nowrap}
-.mp-subhead{font-family:var(--font-heading);font-size:.82rem;color:var(--amber);text-transform:uppercase;letter-spacing:2px;margin:1.1rem 0 .5rem;font-style:italic;font-weight:700;border-bottom:1px solid var(--border);padding-bottom:.35rem}
-.mp-item{display:flex;justify-content:space-between;align-items:baseline;gap:.5rem;padding:.55rem 0;border-bottom:1px dotted rgba(200,134,42,.2)}
+/* ===== CARTA · ÁLBUM 3D ===== */
+#menu{padding:5.5rem 4% 5.5rem;position:relative;--pw:454px;--ph:638px;
+  background:
+    radial-gradient(ellipse at 50% 32%,rgba(232,196,128,.10),transparent 58%),
+    repeating-linear-gradient(91deg,rgba(0,0,0,.16) 0 1px,transparent 1px 132px),
+    repeating-linear-gradient(0deg,rgba(255,255,255,.018) 0 2px,transparent 2px 7px),
+    linear-gradient(160deg,#3c2715 0%,#2c1c0f 45%,#22150b 100%);overflow:hidden}
+#menu::after{content:'';position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(ellipse at 50% 60%,transparent 45%,rgba(0,0,0,.45) 100%)}
+.carta-head{text-align:center;margin-bottom:2.6rem;position:relative;z-index:2}
+#menu .section-label{color:var(--gold)}
+#menu .section-label::before,#menu .section-label::after{background:var(--gold)}
+.carta-title{font-family:var(--font-heading);font-size:clamp(2rem,4vw,3.1rem);color:var(--warm-white);line-height:1.2}
+.carta-title em{font-style:italic;color:var(--gold)}
+.carta-subtitle{color:rgba(245,230,200,.62);font-size:.95rem;max-width:560px;margin:.8rem auto 0;line-height:1.7}
+.album-viewport{position:relative;display:flex;align-items:center;justify-content:center;gap:1rem;z-index:2}
+.bv-arrow{background:rgba(30,15,5,.55);border:1.5px solid rgba(212,168,67,.45);color:var(--gold);width:54px;height:54px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;transition:background .2s,transform .2s,opacity .3s;box-shadow:0 6px 20px rgba(0,0,0,.35)}
+.bv-arrow:hover:not(:disabled){background:var(--burgundy);transform:scale(1.08);border-color:var(--gold)}
+.bv-arrow:disabled{opacity:.22;cursor:default}
+.bv-arrow svg{width:24px;height:24px}
+.album-stage{width:calc(var(--pw)*2);height:var(--ph);perspective:2600px;perspective-origin:50% 42%;position:relative;flex-shrink:0;max-width:100%}
+.album-stage::after{content:'';position:absolute;left:6%;right:6%;bottom:-26px;height:46px;border-radius:50%;background:radial-gradient(ellipse,rgba(0,0,0,.5),transparent 72%);filter:blur(7px);z-index:0}
+.album{position:relative;width:100%;height:100%;transform-style:preserve-3d;transition:transform 1s var(--ease-out);transform:translateX(-25%)}
+.leaf{position:absolute;top:0;right:0;width:50%;height:100%;transform-origin:left center;transform-style:preserve-3d;transition:transform .95s var(--ease-out)}
+.leaf.flipped{transform:rotateY(-180deg)}
+.face{position:absolute;inset:0;width:100%;height:100%;backface-visibility:hidden;-webkit-backface-visibility:hidden;overflow:hidden;background:linear-gradient(95deg,#f3e4c4,#fbf6ea 16%,#fdf8ee 84%,#f1e1c0);border-radius:0 7px 7px 0}
+.face.front{box-shadow:inset 22px 0 34px -26px rgba(74,45,20,.75),0 0 0 1px rgba(120,80,40,.12)}
+.face.back{transform:rotateY(180deg);border-radius:7px 0 0 7px;box-shadow:inset -22px 0 34px -26px rgba(74,45,20,.75),0 0 0 1px rgba(120,80,40,.12)}
+.cover{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 28%,rgba(212,168,67,.16),transparent 60%),linear-gradient(150deg,#8e2222 0%,#6d1717 52%,#511010 100%);border-radius:0 7px 7px 0;display:flex;align-items:center;justify-content:center;padding:7%}
+.cover::before{content:'';position:absolute;inset:14px;border:1.5px solid rgba(212,168,67,.55);border-radius:4px;pointer-events:none}
+.cover::after{content:'';position:absolute;left:0;top:0;bottom:0;width:14px;background:linear-gradient(90deg,rgba(0,0,0,.32),transparent)}
+.cover-inner{text-align:center;display:flex;flex-direction:column;align-items:center;gap:.5rem;position:relative;z-index:2}
+.cover-logo{width:74%;max-width:230px;height:auto;filter:drop-shadow(0 8px 22px rgba(0,0,0,.4)) drop-shadow(0 0 1px rgba(212,168,67,.5))}
+.cover-script{font-family:var(--font-script);font-size:2.7rem;color:var(--gold);line-height:1;margin-top:.2rem;text-shadow:0 2px 10px rgba(0,0,0,.3)}
+.cover-rule{display:flex;align-items:center;gap:.6rem;color:rgba(212,168,67,.8);font-size:.66rem;letter-spacing:4px;text-transform:uppercase;margin-top:.1rem}
+.cover-rule::before,.cover-rule::after{content:'';width:30px;height:1px;background:rgba(212,168,67,.6)}
+.cover-flag{display:flex;width:54px;height:8px;border-radius:2px;overflow:hidden;margin-top:1.1rem;box-shadow:0 2px 8px rgba(0,0,0,.3)}
+.cover-flag span{flex:1}.cover-flag span:nth-child(2){background:#fff}.cover-flag span:nth-child(1),.cover-flag span:nth-child(3){background:var(--red)}
+.cover-hint{position:absolute;bottom:5%;left:0;right:0;text-align:center;color:rgba(245,230,200,.7);font-size:.72rem;letter-spacing:2px;text-transform:uppercase;animation:hintPulse 2.2s ease-in-out infinite}
+@keyframes hintPulse{0%,100%{opacity:.45}50%{opacity:.9}}
+.backcover{position:absolute;inset:0;background:linear-gradient(150deg,#6d1717,#511010);border-radius:7px 0 0 7px;display:flex;align-items:center;justify-content:center;padding:9%;text-align:center}
+.backcover::before{content:'';position:absolute;inset:14px;border:1.5px solid rgba(212,168,67,.45);border-radius:4px}
+.bc-inner{position:relative;z-index:2;color:rgba(245,230,200,.85);display:flex;flex-direction:column;align-items:center;gap:1rem}
+.bc-inner .cover-script{font-size:1.8rem}
+.bc-thanks{font-family:var(--font-heading);font-style:italic;font-size:1.05rem;color:var(--gold)}
+.bc-meta{font-size:.78rem;letter-spacing:1px;line-height:1.9}
+.page-inner{position:absolute;inset:0;display:flex;flex-direction:column;padding:2.1rem 2.2rem 1.2rem;overflow-y:auto;overflow-x:hidden}
+.page-inner::-webkit-scrollbar{width:4px}.page-inner::-webkit-scrollbar-thumb{background:rgba(125,26,26,.3);border-radius:2px}
+.page-runhead{display:flex;align-items:center;justify-content:center;gap:.6rem;font-size:.62rem;letter-spacing:3px;text-transform:uppercase;color:var(--amber);font-weight:700;margin-bottom:1.1rem;opacity:.8}
+.page-runhead::before,.page-runhead::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,transparent,var(--border),transparent)}
+.page-body{flex:1}
+.mp-secttl{font-family:var(--font-display);font-size:1.5rem;color:var(--burgundy);text-align:center;margin:.2rem 0 .2rem;letter-spacing:.3px}
+.mp-secttl.cont{font-size:1.05rem;font-style:normal;opacity:.7}
+.mp-sectsub{display:flex;align-items:center;gap:.5rem;margin:0 0 1rem;justify-content:center}
+.mp-sectsub::before,.mp-sectsub::after{content:'';width:30px;height:1px;background:var(--border)}
+.mp-sectsub span{font-size:.62rem;letter-spacing:2.5px;color:var(--amber);text-transform:uppercase;font-family:var(--font-body)}
+.mp-item{display:flex;justify-content:space-between;align-items:baseline;gap:.6rem;padding:.5rem 0;border-bottom:1px dotted rgba(200,134,42,.28)}
 .mp-item:last-child{border-bottom:none}
 .mp-left{flex:1;min-width:0}
-.mp-name{font-family:var(--font-heading);font-size:.96rem;color:var(--espresso);font-weight:600;line-height:1.25}
-.mp-desc{font-size:.78rem;color:var(--muted);line-height:1.45;margin-top:.15rem}
-.mp-note{font-size:.72rem;color:var(--amber);font-style:italic;margin-top:.12rem}
-.mp-price{font-family:var(--font-heading);color:var(--burgundy);font-size:1rem;font-weight:700;white-space:nowrap;flex-shrink:0;padding-left:.5rem}
-.mp-footer{margin-top:auto;padding-top:1rem;text-align:center;border-top:1px solid var(--border)}
-.mp-footer-brand{font-family:var(--font-display);font-size:.85rem;color:rgba(125,26,26,.18);letter-spacing:3px;text-transform:uppercase}
-.mp-footer-flag{display:inline-flex;gap:2px;margin-top:.3rem;justify-content:center}
-.mp-footer-flag span{width:10px;height:4px;border-radius:1px}
-.mp-footer-flag span:nth-child(1),.mp-footer-flag span:nth-child(3){background:rgba(192,43,30,.22)}
-.mp-footer-flag span:nth-child(2){background:rgba(125,26,26,.1)}
-.bv-meta{display:flex;align-items:center;justify-content:space-between;max-width:1120px;margin:0 auto 1.8rem;padding:0 80px}
-.bv-title{font-family:var(--font-heading);font-size:1.1rem;color:var(--espresso);font-weight:700;font-style:italic}
-.bv-count{font-size:.82rem;color:var(--muted);letter-spacing:1px;font-family:var(--font-body)}
-.bv-cats{display:flex;flex-wrap:wrap;gap:.5rem;justify-content:center;max-width:1200px;margin:0 auto}
-.bv-cat{background:transparent;border:1.5px solid var(--border);color:var(--muted);padding:.5rem 1.2rem;min-height:44px;border-radius:20px;font-size:.76rem;letter-spacing:1px;text-transform:uppercase;cursor:pointer;transition:.2s;font-family:var(--font-body);font-weight:700;display:inline-flex;align-items:center}
-.bv-cat:hover{border-color:var(--burgundy);color:var(--burgundy)}
+.mp-name{font-family:var(--font-heading);font-size:.95rem;color:var(--espresso);font-weight:600;line-height:1.25}
+.mp-desc{font-size:.76rem;color:var(--muted);line-height:1.45;margin-top:.18rem;font-weight:300}
+.mp-dots{flex:1;border-bottom:1px dotted rgba(160,120,60,.35);margin:0 .1rem .12rem;min-width:14px;align-self:flex-end}
+.mp-price{font-family:var(--font-heading);color:var(--burgundy);font-size:1rem;font-weight:700;white-space:nowrap;flex-shrink:0}
+.mp-varrow{display:flex;flex-wrap:wrap;gap:.35rem;margin-top:.4rem}
+.mp-chip{font-size:.68rem;color:var(--brown);background:rgba(200,134,42,.12);border:1px solid rgba(200,134,42,.25);border-radius:20px;padding:.12rem .55rem;white-space:nowrap}
+.mp-chip b{color:var(--burgundy);font-family:var(--font-heading)}
+.page-foot{margin-top:auto;padding-top:.8rem;display:flex;align-items:center;justify-content:space-between;border-top:1px solid var(--border)}
+.page-foot-brand{font-family:var(--font-display);font-size:.7rem;color:rgba(125,26,26,.22);letter-spacing:3px;text-transform:uppercase}
+.page-num{font-size:.7rem;color:rgba(125,26,26,.4);font-family:var(--font-heading);font-style:italic}
+.bv-meta{display:flex;align-items:center;justify-content:center;gap:1.2rem;margin:2.4rem auto 1.4rem;position:relative;z-index:2}
+.bv-title{font-family:var(--font-heading);font-size:1.05rem;color:var(--gold);font-weight:700;font-style:italic}
+.bv-count{font-size:.78rem;color:rgba(245,230,200,.55);letter-spacing:1px}
+.bv-cats{display:flex;flex-wrap:wrap;gap:.45rem;justify-content:center;max-width:920px;margin:0 auto;position:relative;z-index:2}
+.bv-cat{background:rgba(255,250,242,.06);border:1.5px solid rgba(212,168,67,.28);color:rgba(245,230,200,.78);padding:.42rem 1rem;min-height:40px;border-radius:20px;font-size:.7rem;letter-spacing:1px;text-transform:uppercase;cursor:pointer;transition:.2s;font-family:var(--font-body);font-weight:700;display:inline-flex;align-items:center}
+.bv-cat:hover{border-color:var(--gold);color:var(--gold)}
 .bv-cat.active{background:var(--burgundy);border-color:var(--burgundy);color:#fff}
-@media(max-width:720px){
-  .bv-spine{display:none}.bv-page-r{display:none!important}
-  .bv-book{border-radius:6px;box-shadow:0 20px 50px rgba(30,15,5,.15);height:520px}
-  .bv-meta{padding:0 54px}
-  .bv-page{height:100%}
-  .mp-wrap{padding:1.2rem 1rem}
-  .mp-title{font-size:1.2rem}
-  .mp-name{font-size:.95rem}
-  .mp-desc{font-size:.78rem;line-height:1.5}
-  .mp-note{font-size:.72rem}
-  .mp-price{font-size:.95rem}
-  .mp-subhead{font-size:.78rem}
-  .bv-cat{font-size:.72rem}
-}
-@media(max-width:480px){
-  .bv-arrow{width:44px;height:44px;border-radius:50%}
-  .bv-arrow svg{width:20px;height:20px}
-  .bv-page{min-height:300px;max-height:none}
-  .mp-name{font-size:1rem}
-  .mp-price{font-size:1rem}
-  .mp-desc{font-size:.82rem}
+#mbook{display:none}
+.m-nav{display:none}
+@media(max-width:820px){
+  #menu{--pw:min(86vw,420px);--ph:min(128vw,600px)}
+  .album-viewport{display:none}
+  .bv-meta{margin-top:.5rem}
+  #mbook{display:block;position:relative;width:var(--pw);height:var(--ph);margin:0 auto;perspective:1800px;z-index:2}
+  .mface{position:absolute;inset:0;border-radius:8px;overflow:hidden;background:linear-gradient(95deg,#f3e4c4,#fdf8ee 50%,#f1e1c0);box-shadow:0 18px 44px rgba(0,0,0,.4);transform-style:preserve-3d}
+  #mUnder{z-index:1}
+  #mTop{z-index:2;transform-origin:left center;transition:transform .55s var(--ease-out),box-shadow .55s}
+  #mTop.turn{transform:rotateY(-168deg);box-shadow:0 18px 44px rgba(0,0,0,.55)}
+  .m-nav{display:flex;align-items:center;justify-content:center;gap:1.4rem;margin:1.5rem auto 0;position:relative;z-index:2}
+  .mp-secttl{font-size:1.4rem}.mp-name{font-size:.98rem}.mp-desc{font-size:.8rem}
+  .cover-logo{width:66%}
 }
 
 /* VINOS & CÓCTELES */
@@ -697,30 +725,40 @@ footer{background:var(--espresso);padding:4rem 8% 2rem}
 <!-- CARTA -->
 <section id="menu" aria-label="Carta del Restaurante">
   <div class="carta-head reveal">
-    <div class="section-label">Menú completo</div>
-    <h2 class="section-title">Nuestra <em>Carta</em></h2>
-    <p class="carta-subtitle">Navega entre páginas con las flechas, desliza en móvil o elige directamente la categoría que buscas.</p>
+    <div class="section-label">Carta completa</div>
+    <h2 class="carta-title">Nuestra <em>Carta</em></h2>
+    <p class="carta-subtitle">Un álbum para hojear: abre la portada y recorre cada categoría, plato por plato.</p>
   </div>
 
-  <div class="book-viewer">
-    <button class="bv-arrow bv-prev" id="bvPrev" aria-label="Página anterior" disabled>
+  <div class="album-viewport">
+    <button class="bv-arrow" id="bvPrev" aria-label="Página anterior" disabled>
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
     </button>
-    <div class="bv-book" id="bvBook">
-      <div class="bv-spine"></div>
-      <div class="bv-page bv-page-l" id="bvPageL"></div>
-      <div class="bv-page bv-page-r" id="bvPageR"></div>
+    <div class="album-stage" id="albumStage">
+      <div class="album" id="album"></div>
     </div>
-    <button class="bv-arrow bv-next" id="bvNext" aria-label="Página siguiente">
+    <button class="bv-arrow" id="bvNext" aria-label="Página siguiente">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+    </button>
+  </div>
+
+  <div id="mbook">
+    <div class="mface" id="mUnder"></div>
+    <div class="mface" id="mTop"></div>
+  </div>
+  <div class="m-nav">
+    <button class="bv-arrow" id="mPrev" aria-label="Página anterior" disabled>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+    </button>
+    <button class="bv-arrow" id="mNext" aria-label="Página siguiente">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
     </button>
   </div>
 
   <div class="bv-meta">
-    <span class="bv-title" id="bvTitle">Entradas · Tiraditos</span>
-    <span class="bv-count">Página <span id="bvCur">1–2</span> de 16</span>
+    <span class="bv-title" id="bvTitle">Portada</span>
+    <span class="bv-count" id="bvCount"></span>
   </div>
-
   <div class="bv-cats" id="bvCats"></div>
 </section>
 
@@ -728,94 +766,18 @@ footer{background:var(--espresso);padding:4rem 8% 2rem}
 <section id="bebidas" aria-label="Vinos y Cócteles">
   <div class="beb-header reveal">
     <div class="section-label">Bar &amp; Bodega</div>
-    <h2 class="section-title">Vinos &amp; <em style="color:var(--gold)">Cócteles</em></h2>
-    <p class="section-subtitle">Desde piscos artesanales de Perú hasta una cuidada selección de vinos chilenos. Cada copa, una historia.</p>
+    <h2 class="section-title">Vinos &amp; <em style="color:var(--gold)">Bodega</em></h2>
+    <p class="section-subtitle">Piscos artesanales, pisco sours, chilcanos, macerados, cervezas y cócteles de autor ya viven dentro de nuestra carta. Para los vinos, descubre nuestra bodega completa.</p>
   </div>
 
-  <div class="drk-body reveal">
-    <div class="drk-cols-wrap">
-
-      <!-- COLUMNA 1: Piscos & Macerados -->
-      <div class="drk-col">
-        <div class="drk-col-inner" style="animation-duration:26s">
-          <div class="drk-card"><span class="drk-tag tag-pisco">Pisco</span><div class="drk-name">Pisco Sour Clásico</div><div class="drk-hint">Pisco peruano, limón fresco y clara de huevo</div><div class="drk-price">$7.900</div></div>
-          <div class="drk-card"><span class="drk-tag tag-pisco">Pisco</span><div class="drk-name">Sour de Frutilla</div><div class="drk-hint">Macerado artesanal de frutilla con pisco</div><div class="drk-price">$8.900</div></div>
-          <div class="drk-card"><span class="drk-tag tag-pisco">Pisco</span><div class="drk-name">Chilcano Clásico</div><div class="drk-hint">Pisco, ginger ale, limón y bitters peruanos</div><div class="drk-price">$8.900</div></div>
-          <div class="drk-card"><span class="drk-tag tag-macera">Macerado</span><div class="drk-name">Macerado Maracuyá</div><div class="drk-hint">Fruta tropical macerada en pisco artesanal</div><div class="drk-price">$8.900</div></div>
-          <div class="drk-card"><span class="drk-tag tag-pisco">Pisco</span><div class="drk-name">Sour de Mango</div><div class="drk-hint">Mango tropical en sour estilo peruano</div><div class="drk-price">$8.900</div></div>
-          <div class="drk-card"><span class="drk-tag tag-macera">Macerado</span><div class="drk-name">Macerado Hojas de Coca</div><div class="drk-hint">Sabor andino único e intensamente aromático</div><div class="drk-price">$10.900</div></div>
-          <div class="drk-card"><span class="drk-tag tag-pisco">Pisco</span><div class="drk-name">Sour Catedral</div><div class="drk-hint">Formato grande, pisco premium Catedral</div><div class="drk-price">$9.900</div></div>
-          <div class="drk-card"><span class="drk-tag tag-macera">Macerado</span><div class="drk-name">Macerado Aguaymanto</div><div class="drk-hint">Fruta peruana de altura, dulce y ácida</div><div class="drk-price">$8.900</div></div>
-          <div class="drk-card"><span class="drk-tag tag-macera">Macerado</span><div class="drk-name">Macerado Jengibre</div><div class="drk-hint">Intenso, especiado y refrescante</div><div class="drk-price">$8.900</div></div>
-          <!-- DUPLICATE for seamless loop -->
-          <div class="drk-card"><span class="drk-tag tag-pisco">Pisco</span><div class="drk-name">Pisco Sour Clásico</div><div class="drk-hint">Pisco peruano, limón fresco y clara de huevo</div><div class="drk-price">$7.900</div></div>
-          <div class="drk-card"><span class="drk-tag tag-pisco">Pisco</span><div class="drk-name">Sour de Frutilla</div><div class="drk-hint">Macerado artesanal de frutilla con pisco</div><div class="drk-price">$8.900</div></div>
-          <div class="drk-card"><span class="drk-tag tag-pisco">Pisco</span><div class="drk-name">Chilcano Clásico</div><div class="drk-hint">Pisco, ginger ale, limón y bitters peruanos</div><div class="drk-price">$8.900</div></div>
-          <div class="drk-card"><span class="drk-tag tag-macera">Macerado</span><div class="drk-name">Macerado Maracuyá</div><div class="drk-hint">Fruta tropical macerada en pisco artesanal</div><div class="drk-price">$8.900</div></div>
-          <div class="drk-card"><span class="drk-tag tag-pisco">Pisco</span><div class="drk-name">Sour de Mango</div><div class="drk-hint">Mango tropical en sour estilo peruano</div><div class="drk-price">$8.900</div></div>
-          <div class="drk-card"><span class="drk-tag tag-macera">Macerado</span><div class="drk-name">Macerado Hojas de Coca</div><div class="drk-hint">Sabor andino único e intensamente aromático</div><div class="drk-price">$10.900</div></div>
-          <div class="drk-card"><span class="drk-tag tag-pisco">Pisco</span><div class="drk-name">Sour Catedral</div><div class="drk-hint">Formato grande, pisco premium Catedral</div><div class="drk-price">$9.900</div></div>
-          <div class="drk-card"><span class="drk-tag tag-macera">Macerado</span><div class="drk-name">Macerado Aguaymanto</div><div class="drk-hint">Fruta peruana de altura, dulce y ácida</div><div class="drk-price">$8.900</div></div>
-          <div class="drk-card"><span class="drk-tag tag-macera">Macerado</span><div class="drk-name">Macerado Jengibre</div><div class="drk-hint">Intenso, especiado y refrescante</div><div class="drk-price">$8.900</div></div>
-        </div>
-      </div>
-
-      <!-- COLUMNA 2: Cócteles -->
-      <div class="drk-col">
-        <div class="drk-col-inner" style="animation-duration:34s">
-          <div class="drk-card"><span class="drk-tag tag-coctel">Signature</span><div class="drk-name">Cóctel Larcomar</div><div class="drk-hint">La firma de nuestra barra peruana</div><div class="drk-price">$8.900</div></div>
-          <div class="drk-card"><span class="drk-tag tag-coctel">Especial</span><div class="drk-name">Sangría Larcomar</div><div class="drk-hint">Vino tinto, frutas frescas y especias de la casa</div><div class="drk-price">$9.900</div></div>
-          <div class="drk-card"><span class="drk-tag tag-coctel">Clásico</span><div class="drk-name">Piña Colada</div><div class="drk-hint">Ron, leche de coco y jugo de piña natural</div><div class="drk-price">$7.900</div></div>
-          <div class="drk-card"><span class="drk-tag tag-coctel">Clásico</span><div class="drk-name">Mojito Clásico</div><div class="drk-hint">Hierbabuena fresca, ron blanco y limón</div><div class="drk-price">$7.900</div></div>
-          <div class="drk-card"><span class="drk-tag tag-coctel">Especial</span><div class="drk-name">Kontiki</div><div class="drk-hint">Cóctel tropical de la casa con toque peruano</div><div class="drk-price">$9.900</div></div>
-          <div class="drk-card"><span class="drk-tag tag-coctel">Clásico</span><div class="drk-name">Aperol Spritz</div><div class="drk-hint">Aperol, espumante chileno y naranja fresca</div><div class="drk-price">$8.900</div></div>
-          <div class="drk-card"><span class="drk-tag tag-coctel">Clásico</span><div class="drk-name">Margarita</div><div class="drk-hint">Tequila Jose Cuervo, limón y sal de mar</div><div class="drk-price">$7.900</div></div>
-          <div class="drk-card"><span class="drk-tag tag-coctel">Clásico</span><div class="drk-name">Daiquiri de Sabores</div><div class="drk-hint">Frutilla, mango o maracuyá con ron blanco</div><div class="drk-price">$7.900</div></div>
-          <div class="drk-card"><span class="drk-tag tag-coctel">Especial</span><div class="drk-name">Machu Picchu</div><div class="drk-hint">Cóctel peruano de altura con pisco y frutas</div><div class="drk-price">$6.900</div></div>
-          <!-- DUPLICATE -->
-          <div class="drk-card"><span class="drk-tag tag-coctel">Signature</span><div class="drk-name">Cóctel Larcomar</div><div class="drk-hint">La firma de nuestra barra peruana</div><div class="drk-price">$8.900</div></div>
-          <div class="drk-card"><span class="drk-tag tag-coctel">Especial</span><div class="drk-name">Sangría Larcomar</div><div class="drk-hint">Vino tinto, frutas frescas y especias de la casa</div><div class="drk-price">$9.900</div></div>
-          <div class="drk-card"><span class="drk-tag tag-coctel">Clásico</span><div class="drk-name">Piña Colada</div><div class="drk-hint">Ron, leche de coco y jugo de piña natural</div><div class="drk-price">$7.900</div></div>
-          <div class="drk-card"><span class="drk-tag tag-coctel">Clásico</span><div class="drk-name">Mojito Clásico</div><div class="drk-hint">Hierbabuena fresca, ron blanco y limón</div><div class="drk-price">$7.900</div></div>
-          <div class="drk-card"><span class="drk-tag tag-coctel">Especial</span><div class="drk-name">Kontiki</div><div class="drk-hint">Cóctel tropical de la casa con toque peruano</div><div class="drk-price">$9.900</div></div>
-          <div class="drk-card"><span class="drk-tag tag-coctel">Clásico</span><div class="drk-name">Aperol Spritz</div><div class="drk-hint">Aperol, espumante chileno y naranja fresca</div><div class="drk-price">$8.900</div></div>
-          <div class="drk-card"><span class="drk-tag tag-coctel">Clásico</span><div class="drk-name">Margarita</div><div class="drk-hint">Tequila Jose Cuervo, limón y sal de mar</div><div class="drk-price">$7.900</div></div>
-          <div class="drk-card"><span class="drk-tag tag-coctel">Clásico</span><div class="drk-name">Daiquiri de Sabores</div><div class="drk-hint">Frutilla, mango o maracuyá con ron blanco</div><div class="drk-price">$7.900</div></div>
-          <div class="drk-card"><span class="drk-tag tag-coctel">Especial</span><div class="drk-name">Machu Picchu</div><div class="drk-hint">Cóctel peruano de altura con pisco y frutas</div><div class="drk-price">$6.900</div></div>
-        </div>
-      </div>
-
-      <!-- COLUMNA 3: Vinos & Bar -->
-      <div class="drk-col">
-        <div class="drk-col-inner" style="animation-duration:22s">
-          <div class="drk-card"><span class="drk-tag tag-tinto">Tinto</span><div class="drk-name">Cab. Sauv. Santa Ema</div><div class="drk-hint">Select Terroir Reserve · Maipo</div><div class="drk-price">$18.900</div></div>
-          <div class="drk-card"><span class="drk-tag tag-tinto">Tinto</span><div class="drk-name">Carmenere Ventisquero</div><div class="drk-hint">Reserva · Valle del Maipo</div><div class="drk-price">$16.900</div></div>
-          <div class="drk-card"><span class="drk-tag tag-blanco">Blanco</span><div class="drk-name">Sauvignon Blanc</div><div class="drk-hint">Casas del Bosque · Casablanca</div><div class="drk-price">$15.900</div></div>
-          <div class="drk-card"><span class="drk-tag tag-tinto">Premium</span><div class="drk-name">Toro de Piedra Gran Reserva</div><div class="drk-hint">Cabernet Sauvignon · Colchagua</div><div class="drk-price">$24.900</div></div>
-          <div class="drk-card"><span class="drk-tag tag-espum">Espumante</span><div class="drk-name">Catedral Brut</div><div class="drk-hint">Espumante chileno fino y burbujante</div><div class="drk-price">$16.900</div></div>
-          <div class="drk-card"><span class="drk-tag tag-blanco">Por Copa</span><div class="drk-name">Copa de Vino</div><div class="drk-hint">Cabernet Sauvignon o Sauvignon Blanc</div><div class="drk-price">$4.900</div></div>
-          <div class="drk-card"><span class="drk-tag tag-bar">Whisky</span><div class="drk-name">Jack Daniels</div><div class="drk-hint">Tennessee Whiskey americano clásico</div><div class="drk-price">$8.900</div></div>
-          <div class="drk-card"><span class="drk-tag tag-bar">Cerveza</span><div class="drk-name">Cusqueña Rubia</div><div class="drk-hint">Cerveza peruana premiada internacionalmente</div><div class="drk-price">$3.900</div></div>
-          <div class="drk-card"><span class="drk-tag tag-bar">Bajativo</span><div class="drk-name">Baileys</div><div class="drk-hint">Crema irlandesa suave con whisky</div><div class="drk-price">$5.500</div></div>
-          <!-- DUPLICATE -->
-          <div class="drk-card"><span class="drk-tag tag-tinto">Tinto</span><div class="drk-name">Cab. Sauv. Santa Ema</div><div class="drk-hint">Select Terroir Reserve · Maipo</div><div class="drk-price">$18.900</div></div>
-          <div class="drk-card"><span class="drk-tag tag-tinto">Tinto</span><div class="drk-name">Carmenere Ventisquero</div><div class="drk-hint">Reserva · Valle del Maipo</div><div class="drk-price">$16.900</div></div>
-          <div class="drk-card"><span class="drk-tag tag-blanco">Blanco</span><div class="drk-name">Sauvignon Blanc</div><div class="drk-hint">Casas del Bosque · Casablanca</div><div class="drk-price">$15.900</div></div>
-          <div class="drk-card"><span class="drk-tag tag-tinto">Premium</span><div class="drk-name">Toro de Piedra Gran Reserva</div><div class="drk-hint">Cabernet Sauvignon · Colchagua</div><div class="drk-price">$24.900</div></div>
-          <div class="drk-card"><span class="drk-tag tag-espum">Espumante</span><div class="drk-name">Catedral Brut</div><div class="drk-hint">Espumante chileno fino y burbujante</div><div class="drk-price">$16.900</div></div>
-          <div class="drk-card"><span class="drk-tag tag-blanco">Por Copa</span><div class="drk-name">Copa de Vino</div><div class="drk-hint">Cabernet Sauvignon o Sauvignon Blanc</div><div class="drk-price">$4.900</div></div>
-          <div class="drk-card"><span class="drk-tag tag-bar">Whisky</span><div class="drk-name">Jack Daniels</div><div class="drk-hint">Tennessee Whiskey americano clásico</div><div class="drk-price">$8.900</div></div>
-          <div class="drk-card"><span class="drk-tag tag-bar">Cerveza</span><div class="drk-name">Cusqueña Rubia</div><div class="drk-hint">Cerveza peruana premiada internacionalmente</div><div class="drk-price">$3.900</div></div>
-          <div class="drk-card"><span class="drk-tag tag-bar">Bajativo</span><div class="drk-name">Baileys</div><div class="drk-hint">Crema irlandesa suave con whisky</div><div class="drk-price">$5.500</div></div>
-        </div>
-      </div>
-
-    </div>
-
-    <div class="drk-cta-wrap">
+  <div class="drk-body reveal" style="text-align:center;max-width:640px;margin:0 auto">
+    <p style="color:rgba(251,245,232,.7);font-size:.96rem;line-height:1.8;margin-bottom:2.2rem">
+      Una cuidada selección de vinos chilenos —tintos, blancos y espumantes— pensada para acompañar cada plato. Pregunta a nuestro equipo por las sugerencias del día.
+    </p>
+    <div class="drk-cta-wrap" style="margin-top:0">
       <a href="https://drive.google.com/drive/folders/1anC-DCo5oxV9e1NpX8cMBoMeqSh82FQz?usp=drive_link" id="drk-pdf-link" class="drk-cta-btn" target="_blank" rel="noopener">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-        Ver carta completa de vinos &amp; cócteles
+        Ver carta completa de vinos
       </a>
       <p class="drk-note">Se abre en Google Drive · nueva pestaña</p>
     </div>
@@ -1050,291 +1012,476 @@ document.getElementById('hamburger').addEventListener('click',function(){documen
 document.getElementById('mobClose').addEventListener('click',closeMob);
 function closeMob(){document.getElementById('mobileMenu').classList.remove('open');document.getElementById('hamburger').setAttribute('aria-expanded','false');document.body.style.overflow='';}
 
-// BOOK VIEWER — Carta tipográfica con datos reales
+// CARTA — Álbum 3D con datos reales (Excel del cliente, hoja CARTA INTERNET MODIFICADO)
+const CARTA=[
+{t:'Entradas',g:'comida',items:[
+  {n:'Leche de Tigre',p:4500,d:'Es un concentrado de sabores de pescados y mariscos marinados con zumo de limón y especias.'},
+  {n:'Yucas Fritas con Salsa de Huancaina',p:4600,d:'Yucas fritas acompañadas con una crema de salsa de Huancaína.'},
+  {n:'Papas a la Huancaina',p:4600,d:'Papas cocidas bañadas en una salsa a base de leche, galletas, queso y un punto de ají amarillo.'},
+  {n:'Leche Larcomar',p:4900,d:'Es un concentrado de jugo de ceviches y mariscos con un toque de pisco, y marinados en una crema de ají amarillo.'},
+  {n:'Salpicon de Pollo',p:5200,d:'Ensalada fría a base de lechuga, tomate, zanahoria, papas cocidas, alverjas, trozos de pechuga de pollo, palta y vinagreta.'},
+  {n:'Ensalada Cesar',p:5600,d:'Ensalada de lechuga, tomate, queso, palta, choclo y pechuga de pollo aliñado con zumo de limón y aceite de oliva. Servido con pan tostado.'},
+  {n:'Tequeños de Camaron y Queso',p:5800,d:'Consiste en una masa de harina de trigo fría, rellena de queso y camarón servido con una crema a la huancaína.'},
+  {n:'Solterito Vegetariano',p:5900,d:'Es un plato nutritivo y ligero con ingredientes originales a base de queso, tomate, choclo, cebolla, habas verdes, palta y un punto de limón pica con olivo.'},
+  {n:'Pulpo al Olivo',p:8500,d:'Laminas de pulpo macerado en limón de pica y especias, acompañado en salsa olivar.'},
+]},
+{t:'Tiraditos',g:'comida',items:[
+  {n:'Tiradito de Pescado',p:8300,d:'Finos filetes de pescado en corte juliana, marinados en una salsa picante fría y ácida acompañado de camote y choclo desgranado.'},
+  {n:'Tiradito Larcomar',p:8900,d:'Finos filetes de pescado en corte juliana marinados en jugo de limón de pica y especias bañado con una salsa de crema de ají amarillo acompañado en una salsa a la chalaca'},
+  {n:'Tiradito de Pulpo y Camaron',p:9200,d:'Finas láminas de pulpo y camarón, bañados en una deliciosa salsa de leche de tigre.'},
+  {n:'Tiradito 3 Sabores',p:9600,d:'Finas láminas de pescado macerados en jugo de limón de pica y especias servido con punto de ají amarillo, crema de rocoto y leche de tigre.'},
+]},
+{t:'Causas',g:'comida',items:[
+  {n:'Causa Limeña de Atun',p:5200,d:'Puré de papas amarillas con aceite de oliva, gotas de limón y un punto de ají amarillo, relleno con palta, atún y mayonesa.'},
+  {n:'Causa Limeña de Pollo, con Salsa Huancaina',p:5600,d:'Puré de papa amarilla con aceite de oliva, gotas de limón y un punto de ají amarillo, relleno con palta, pollo y mayonesa bañado en una salsa a la huancaína.'},
+  {n:'Causa de Pulpo en Salsa Olivar',p:6200,d:'Suave masa de papa amarilla y ají amarillo, relleno de tiernas láminas de pulpo con una salsa de nuestros mejores olivos.'},
+  {n:'Causa de Camarones',p:6500,d:'Suave masa de papa y ají amarillo relleno de deliciosos camarones con una salsa de mayonesa.'},
+]},
+{t:'Ceviches',g:'comida',items:[
+  {n:'Ceviche de Pescado',p:8300,d:'Delicados trozos de pescado en cubos, marinados en jugo de limón de pica y especias al mejor estilo peruano.'},
+  {n:'Ceviche Mixto Especial',p:8900,d:'Mistura de mariscos y pescados previamente cocidos, marinados en jugo de limón de pica, ají, cebolla corte pluma y especias, acompañado de yuca y choclo peruano.'},
+  {n:'Ceviche Larcomar',p:9600,d:'Mixtura de mariscos y pescado, macerados en una leche de Tigre tradicional servido con ostiones y pinzas de jaiba.'},
+  {n:'Ceviche de Pulpo',p:9200,d:'Láminas de pulpo marinados en jugo de limón y especias, acompañados con yuca y choclo.'},
+  {n:'Ceviche Criollo',p:9200,d:'Dúo perfecto de ceviche con papa a la huancaína'},
+  {n:'Ceviche de Salmón y Camaron',p:9600,d:'Trozos de filete de salmón y camarón, marinados en zumo de limón y especias, acompañado con choclo y camote.'},
+  {n:'Festival de Ceviches (2 personas)',p:15900,d:'Deliciosa combinación de ceviches salmón, reineta y mariscos, macerado en tres diferentes salsas. Servido con camote, choclo y cancha.'},
+]},
+{t:'Piqueos',g:'comida',items:[
+  {n:'Piqueo Marino (2 personas)',p:15900,d:'Dúo perfecto de ceviche mixto con chicharrón mixto, acompañado con choclo, camote y yuca frita.'},
+  {n:'Piqueo Frio Larcomar (3 personas)',p:19600,d:'Combinación de piqueos fríos, pulpo al olivo, tiradito de pescado, festival de mariscos con causas de atún.'},
+  {n:'Piqueo Larcomar (3 personas)',p:19600,d:'Combinación de brochetas mixtas Lomo y Pollo acompañados con Chicharron de pescado y papas fritas.'},
+  {n:'Jalea Mixta Especial (3 personas)',p:16900,d:'Contundente y sabrosos trozos de pescado y mariscos fritos, acompañado con zarza criolla, choclo peruano, yucas fritas y salsa tártara.'},
+  {n:'Maretazo Larcomar (2 personas)',p:19600,d:'Una exquisita trilogía de piqueos, chicharrón mixto, ceviche y arroz con mariscos.'},
+]},
+{t:'Chicharrones',g:'comida',items:[
+  {n:'Chicharron de Pollo',p:7500,d:'Filete de pollos fritos apanados con harina de pan, servido con zarza criolla y papas fritas.'},
+  {n:'Chicharron de Pescado',p:8300,d:'Finos trozos de pescado frito, servido con papas doradas y zarza criolla.'},
+  {n:'Chicharron de Calamar',p:8500,d:'Aros de calamar fritos acompañados con papa dorada y zarza criolla.'},
+  {n:'Chicharron Mixto',p:8900,d:'Mistura de marisco y pescado, previamente apanadas y fritas, servido con papa frita y zarza criolla.'},
+  {n:'Chicharron de Camaron',p:9300,d:'Exquisitos camarones apanados con harina de pan, acompañados con papa dorada y zarza criolla.'},
+]},
+{t:'Parrilladas',g:'comida',items:[
+  {n:'Pollo a la Parrilla',p:7900},
+  {n:'Lomo a la Parrilla',p:8500},
+  {n:'Brochetas de Pollo',p:7900,d:'Trozos de pechuga de pollo a la plancha acompañados con papa frita y ensalada mixta'},
+  {n:'Brochetas de Carne',p:8500,d:'Trozos de lomo de vacuno a la plancha con morrón y cebolla, servida con papas fritas y ensalada mixta.'},
+  {n:'Brochetas Mixta Larcomar',p:8900,d:'Combinación perfecta de exquisitos trozos de carne, pollo, camarón, bañados en una salsa anticuchera, servido con papa frita y ensalada.'},
+  {n:'Pulpo a la Parrilla',p:14900,d:'Delicioso pulpo tierno a la parrilla bañado con una salsa anticuchera, servido con papas salteados y chimichurri.'},
+  {n:'Parrilla para Dos',p:20900,d:'Combinación de cortes, 02 Lomos finos, 02 Chuletas, 01 Pechuga de Pollo, servido con Chorizo, y acompañados con papa frita y ensalada.'},
+  {n:'Parrilla Larcomar (4 personas)',p:32900,d:'Exquisitas carnes a la parrilla, 03 Lomos, 02 Pechuga de Pollo, 03 Chuletas y Chorizos, servido con papas fritas y ensalada mixta.'},
+]},
+{t:'Fondos',g:'comida',items:[
+  {n:'Lomo Saltado',p:8900,d:'Jugosos trozos de lomo fino salteado con cebolla, tomate y especias en un punto de salsa de soya.servido con arroz y papas fritas.'},
+  {n:'Pollo Saltado',p:7900},
+  {n:'Saltado Tres Sabores',p:9400,d:'Combinación de lomo pollo y camarón salteado con cebolla y tomate y especias con un punto de salsa soya servidos con arroz y papas fritas.'},
+  {n:'Tacu-tacu con Filete',p:9200,d:'Agradable mezcla de porotos y arroz al calor de una sarten, acompañado de un fino filete de vacuno y huevos fritos montados.'},
+  {n:'Tacu –tacu con Salsa de Mariscos',p:9200,d:'Deliciosa mezcla de porotos y arroz al calor de una sartén, presentado en una salsa especial de mariscos.'},
+  {n:'Tacu-tacu con Lomo Saltado',p:9300,d:'Exquisita mezcla de porotos y arroz al calor de una sartén, servido en un jugoso lomo saltado.'},
+  {n:'Filete en Salsa Olivar',p:8900,d:'Filetes a la plancha bañado en una reducción de salsa de vino tinto y especias, servido con arroz con choclo.'},
+  {n:'Filete Campestre',p:9200,d:'Filete de vacuno a la plancha, marinado en una salsa de setas (bechamel y salsa madera), servidos con panaché de verduras.'},
+  {n:'Filete en Salsa de Mariscos',p:9200,d:'Filete de vacuno a la plancha bañado con una salsa de mariscos al vino blanco con un punto de ají, servido con arroz.'},
+  {n:'Filete Mignon',p:9300,d:'Filete de vacuno a la plancha, bañado con una salsa madera de champiñón y camarón, servidos con arroz.'},
+  {n:'Filete Pisco Perú',p:9400,d:'Filete a la plancha bañado en una salsa de pisco y mariscos a la crema de ají amarillo, servido con un risotto verde.'},
+  {n:'Filete Mar y Tierra',p:9600,d:'Filete de vacuno a la plancha bañado con una salsa de brochetas de camarón, pulpo y calamar, servido con un risotto de verduras en salsa de estragón.'},
+  {n:'Filete Salsa Camaron y Pulpo',p:9600,d:'Filete de vacuno a la plancha, bañado en una salsa de camarones y estragón, acompañado de arroz con choclo.'},
+  {n:'Filete Larcomar',p:9800,d:'Filete de vacuno a la plancha marinado con hierbas aromáticas, bañadas con una reducción de vinagre balsámico y vino tinto, acompañado con un risotto de camarón.'},
+  {n:'Gordon Blue de Pollo',p:8700,d:'Pechuga de pollo relleno de jamón y queso, bañado con una salsa americana, servido con arroz y papa frita.'},
+  {n:'Gordon Blue de Vacuno',p:8900,d:'Jugoso lomo relleno de jamón y queso, bañado con una salsa americana, servido con arroz y papa frita.'},
+  {n:'Ají de Gallina',p:7900,d:'Exquisita pechuga deshilachada en crema de ají amarillo, nueces, huevo, aceituna, presentado con una porción de arroz blanco.'},
+  {n:'Pollo a la Plancha',p:6900},
+  {n:'Pollo a la Norteña',p:8900,d:'Pollo relleno de queso, champiñón, espinaca y morrón, apanado y frito. Servido con arroz verde y crema huancaína.'},
+  {n:'Pollo a la Plancha en Salsa de Champiñones',p:8900,d:'Pechuga de pollo a la plancha bañado en una rica salsa blanca de champiñones, acompañado con arroz y choclo.'},
+  {n:'Suprema de Pollo',p:7900,d:'Pechuga de pollo apanada y frito en harina de galleta, acompañado con papa frita y ensalada.'},
+  {n:'Seco de Vacuno',p:8200,d:'Trozos de lomo de vacuno a la cacerola en una salsa de cerveza, cilantro y especias servidos con frejol y arroz.'},
+  {n:'Milanesa de Carne',p:8300},
+  {n:'Bisteck a Lo Pobre',p:9200},
+]},
+{t:'Pescados y Mariscos',g:'comida',items:[
+  {n:'Pescado a la Chorrillana',v:[['Reineta',8500],['Salmón',9100],['Congrio',9500]],d:'Pescado a la plancha bañado en una salsa americana, con trozos de cebolla y tomate. Servidos con arroz blanco y papa frita.'},
+  {n:'Pescado a Lo Macho',v:[['Reineta',8900],['Salmón',9200],['Congrio',9600]],d:'Filete de pescado a la plancha bañado en una salsa de mariscos al vino blanco con un punto de ají amarillo.'},
+  {n:'Pescado en Salsa de Mariscos',v:[['Reineta',9200],['Salmón',9400],['Congrio',9700]],d:'Pescado a la plancha con una salsa cremosa de mariscos, servidos con arroz blanco.'},
+  {n:'Pescado en Salsa de Pulpo y Camarones',v:[['Reineta',9200],['Salmón',9700],['Congrio',9900]],d:'Pescado a la plancha con una salsa de camarones y pulpo, con un punto de crema de ají amarillo, acompañado de arroz y choclo.'},
+  {n:'Pescado en Salsa de Camarones',v:[['Reineta',9600],['Salmón',9900],['Congrio',10200]],d:'Filete de pescado a la plancha marinado en una salsa de camarón, acompañado con arroz.'},
+  {n:'Pescado Florentina',v:[['Reineta',9300],['Salmón',9600],['Congrio',9900]],d:'Filete de pescado a la plancha, gratinada en salsa de bechamel con un punto de queso y espinaca al mejor estilo florentino, acompañado con delicioso risotto.'},
+  {n:'Pescado a la Plancha',v:[['Reineta',7900],['Salmón',8600],['Congrio',8900]]},
+  {n:'Pescado Frito',p:8300},
+  {n:'Pescado a la Chalaca',p:8900,d:'Pescado a la plancha bañado en una reducción de vino tinto con camarón y champiñón, acompañado con papas salteadas.'},
+  {n:'Pescado en Salsa Andina',p:8900,d:'Filete de pescado relleno de espinaca, queso y morrón, bañadas en una salsa de alcachofa, servido con arroz.'},
+  {n:'Pescado a la Criolla',p:8900,d:'Pescado a la plancha bañado con una salsa de mariscos a la crema de ají amarillo, servido con arroz.'},
+  {n:'Pescado Armonil',p:9600,d:'Dúo de pescados salmón y reineta a la plancha, con variedad de mariscos gratinados con queso parmesano, acompañados en salsa de ostras y arroz con choclo.'},
+  {n:'Picante de Camarones',p:8900,d:'Guiso de camarones en salsa americana, con papa cocida y verduras, servido con arroz blanco.'},
+  {n:'Picante de Mariscos',p:8900,d:'Mistura de mariscos cocidos en una salsa americana, servido con arroz al cilantro.'},
+  {n:'Salmon a la Plancha',p:8300},
+  {n:'Salmon Oriental',p:8900,d:'Filete de salmón a la plancha con salsa oriental, verduras, salsa de soya y semillas de sésamo.'},
+  {n:'Salmon a las Finas Hierbas',p:8900,d:'Salmón a la plancha aromatizados con finas hierbas acompañado con panaché de verduras.'},
+  {n:'Salmon Larcomar',p:9600,d:'Filete de salmón a la plancha, bañado con una salsa bechamel con mariscos y champiñones, servidos con arroz y choclo.'},
+  {n:'Trilogia Marina',p:8900,d:'Frescos filetes de pescados, salmón, congrio y reineta a la plancha, servido sobre frescas verduras salteadas al wok, con aceite de sésamo, bañado en una reducción de salsa de tamarindo y especias.'},
+  {n:'Cau Cau de Mariscos',p:8900,d:'Mixtura de mariscos cocida en una salsa de ají amarillo con verduras a la jardinera, acompañado con arroz blanco.'},
+]},
+{t:'Arroces',g:'comida',items:[
+  {n:'Arroz con Mariscos',p:8600,d:'Mixtura de mariscos con arroz, cocidos en una salsa americana.'},
+  {n:'Arroz con Camarones',p:8900},
+  {n:'Arroz Chaufa con Carne',p:8400,d:'Arroz salteado con finos trozos de lomo, salteado a las especias orientales con un punto de salsa de soya.'},
+  {n:'Arroz Chaufa con Pollo',p:7900,d:'Arroz salteado con finos trozos de pollo, salteado a las especias orientales con un punto de salsa de soya.'},
+  {n:'Arroz Chaufa con Mariscos',p:8900},
+  {n:'Arroz Chaufa con Camarones',p:9200},
+  {n:'Arroz Chaufa 3 Sabores',p:9300,d:'Arroz salteado a las especias orientales, con camarón vacuno y pollo con un punto de salsa de soya.'},
+  {n:'Risotto con Camaron y Champiñon',p:9200,d:'Cremoso risotto de verduras servido con una salsa de camarón y champiñón.'},
+  {n:'Risotto con Camarones',p:9200,d:'Cremoso risotto de camarón con queso parmesano, crema de leche y un ligero punto de vino blanco con verduras.'},
+  {n:'Risotto de Lomo Saltado',p:9600,d:'Cremoso risotto de verduras a la crema de ají amarillo, acompañado de jugosos trozos de lomo salteado a la criolla.'},
+  {n:'Risotto con Salmon y Camaron',p:9600,d:'Salmón a la plancha con un risotto de camarón.'},
+  {n:'Risotto Larcomar',p:9800,d:'Risotto de verduras a la crema de huancaína, servido con un saltado de tres sabores al vino tinto.'},
+]},
+{t:'Pastas',g:'comida',items:[
+  {n:'Fetuccini Vegetariano',p:7200,d:'Fetuccini salteados con un panaché de verduras con un punto de aceite de oliva y un punto de vino blanco.'},
+  {n:'Fetuccini en Salsa Alfredo',p:7600,d:'Fetuccini cocido en una salsa bechamel con jamón, servido con queso parmesano.'},
+  {n:'Fetuccini con Pollo',p:7900,d:'Fetuccini al dente salteado con trozos de pollo y verduras orientales con un punto de salsa de soya.'},
+  {n:'Fetuccini con Filete',p:8900,d:'Fetuccini al dente salteado con un fino filete de vacuno y verduras orientales con un punto de salsa de soya.'},
+  {n:'Fetuccini al Pesto con Filete',p:9200,d:'Fetuccini bañado con una salsa de albahaca y espinaca, acompañado con un medallon de filete de vacuno y queso parmesano.'},
+  {n:'Fetuccini con Filete con Salsa de Huancaina',p:9200,d:'Fetuccini cocido en una salsa huancaína acompañado con un filete a la plancha.'},
+  {n:'Fetuccini en Salsa de Camaron y Champiñon',p:9200,d:'Fetuccini cocido en una salsa americana con camarón y champiñones.'},
+  {n:'Fetuccini a la Huancaina con Lomo Saltado',p:9200,d:'Trozos de filete de vacuno salteado con cebolla, tomate y especias, acompañado con unos de fetuccini a la crema huancaína.'},
+  {n:'Fetuccini 3 Sabores',p:9400,d:'Fetuccini al dente salteado con trozos de pollo, filete y camarón, salteado brevemente con verduras orientales a un punto de salsa soya.'},
+  {n:'Timbal de Camarones',p:9600,d:'Fetuccini salteado con una salsa americana de camarones gratinado con queso parmesano.'},
+]},
+{t:'Sopas',g:'comida',items:[
+  {n:'Sustancia de Pollo',p:6500,d:'Sopa de trozos de pechuga de pollo con verduras, papa amarilla y fideo cabello de ángel.'},
+  {n:'Sopa a la Minuta',p:7900,d:'Sopa criolla a base de caldo de carne molida y verduras, con fideo cabello de ángel, papa amarilla y un toque de leche, servido con huevo frito.'},
+  {n:'Sopa Larcomar',p:7900,d:'Sancochado de carne con verduras, arroz, papa amarilla, con un toque de vino blanco, servido con yuca.'},
+  {n:'Parihuela',p:8900,d:'Sustancia de concentrado de marisco y pescado con toque de vino blanco.'},
+  {n:'Chupe de Pescado',p:8900,d:'Sustancia de filete de pescado en trozos, papa amarilla, choclo, queso, arroz y leche, acompañado con huevo escalfado.'},
+  {n:'Chupe de Camarones',p:8900,d:'Es un tipo de sopa de larga tradición andina de la ciudad de Arequipa a la que se han incorporado ingredientes mediterráneos queso y leche, camarones, huacatay, habas, papa amarilla, choclo, arroz, acompañado con huevo escalfado.'},
+  {n:'Sudado Especial',p:8900,d:'Filete de pescado y mariscos surtidos, cocidos al vapor con cebolla y tomate y especias, acompañado con arroz blanco y yuca.'},
+]},
+{t:'Pollo a la Brasa',g:'comida',items:[
+  {n:'1 Pollo + Papas Fritas + Ají y Cremas',p:15900},
+  {n:'1 Pollo (solo para llevar)',p:9800},
+  {n:'1/2 Pollo + Papas con Ensalada + Ají y Cremas',p:10200},
+  {n:'1/4 Pollo + Papas con Ensalada + Ají y Cremas',p:5200},
+  {n:'Salchipapa',p:4600},
+  {n:'Salchipollo',p:4900},
+]},
+{t:'Guarniciones',g:'comida',items:[
+  {n:'Arroz Blanco',p:1800},
+  {n:'Papas Fritas',p:2900},
+  {n:'Papas Cocidas y Doradas',p:2000},
+  {n:'Panache de Verduras',p:3000},
+  {n:'Papas Salteadas',p:2200},
+  {n:'Cancha Paccho',p:2000},
+  {n:'Choclo Peruano',p:2200},
+  {n:'Sarsa Criolla',p:2000},
+  {n:'Pure de Papa',p:2500},
+  {n:'Ensalada Surtida',p:2600},
+]},
+{t:'Postres',g:'comida',items:[
+  {n:'Helado Tres Sabores',p:2000},
+  {n:'Suspiro Limeño',p:2800},
+  {n:'Torta Tres Leches',p:2800},
+  {n:'Torta de Chocolate',p:2800},
+  {n:'Crema Volteada',p:2800},
+  {n:'Tiramisu',p:2800},
+  {n:'Pie de Limon',p:2800},
+  {n:'Muss de Maracuya',p:2800},
+]},
+{t:'Jugos Naturales',g:'bar',items:[
+  {n:'Jugos Naturales',p:2500,d:'Variedad de sabores: mango, maracuyá, frutilla, frambuesa, chirimoya y piña.'},
+]},
+{t:'Bebidas · Individuales 350 ml',g:'bar',items:[
+  {n:'Inka Cola',p:1800},
+  {n:'Coca Cola Original',p:1600},
+  {n:'Coca Cola (zero)',p:1600},
+  {n:'Coca Cola (light)',p:1600},
+  {n:'Sprite Original',p:1600},
+  {n:'Sprite (zero)',p:1600},
+  {n:'Fanta',p:1600},
+  {n:'Nectar de Durazno',p:1600},
+  {n:'Agua (con gas /sin gas)',p:1500},
+  {n:'Limonada (vaso)',p:1800},
+  {n:'Limonada Menta Jengibre',p:2000},
+  {n:'Chicha Morada (vaso)',p:2000},
+]},
+{t:'Bebidas · Jarras 1½ L',g:'bar',items:[
+  {n:'Inka Cola',p:3200},
+  {n:'Coca Cola',p:3000},
+  {n:'Coca Cola (zero)',p:3000},
+  {n:'Fanta',p:3000},
+  {n:'Sprite',p:3000},
+  {n:'Jarra de Limonada',p:4500},
+  {n:'Jarra de Limonada Menta Jengibre',p:4800},
+  {n:'Jarra de Chicha',p:5000},
+]},
+{t:'Cervezas 350 ml',g:'bar',items:[
+  {n:'Cusqueña (rubia, negra y trigo)',p:2500},
+  {n:'Corona',p:2300},
+  {n:'Heiniken',p:2300},
+  {n:'Royal',p:2300},
+  {n:'Kuzman Torobayo',p:2800},
+  {n:'Michelada',p:2900},
+]},
+{t:'Aperitivos',g:'bar',items:[
+  {n:'Cocktel Larcomar',p:4200},
+  {n:'Vaina',p:3600},
+  {n:'Algarrobina',p:3700},
+  {n:'Piña Colada',p:3900},
+  {n:'Kit Royal',p:3700},
+  {n:'Daiquiry Sabores',p:3900},
+  {n:'Mojito Cubano',p:3600},
+  {n:'Mojito Sabores',p:3900},
+  {n:'Mojito Corona',p:5000},
+  {n:'Mojito Sabores Corona',p:5500},
+  {n:'Machupicchu',p:3900},
+  {n:'Caipiriña',p:3700},
+  {n:'Amor en Llamas',p:3900},
+  {n:'Laguna Azul',p:3800},
+  {n:'Capitan Acholado',p:3600},
+  {n:'La Tremenda',p:3900},
+  {n:'Pisco Puch',p:3800},
+  {n:'Sangria',p:3200},
+  {n:'Jarra de Sangria',p:9800},
+  {n:'Sanbusete',p:3900},
+  {n:'Chilcano Clasico',p:3800},
+  {n:'Chilcano Clasico Sabores',p:4200},
+  {n:'Martini',p:3700},
+  {n:'Tequila Margarita',p:3900},
+  {n:'Tequila Margarita Sabores',p:4200},
+  {n:'Cuba Libre',p:3500},
+  {n:'Peru Libre',p:3600},
+  {n:'Octubre',p:3900},
+]},
+{t:'Sours',g:'bar',items:[
+  {n:'Botella de Pisco Sour Clasico',p:3500},
+  {n:'Botella Pisco Sour Clasico Catedral',p:5000},
+  {n:'Pisco Sour Sabores',p:3900},
+  {n:'Pisco Sour Sabores Catedral',p:5500},
+  {n:'Amaretto Sour',p:3700},
+  {n:'Whisky Sour',p:4300},
+]},
+{t:'Macerados de Pisco',g:'bar',items:[
+  {n:'Coca',v:[['Chilcano',4200],['Sour',3800],['Catedral',5200]]},
+  {n:'Jengibre',v:[['Chilcano',4200],['Sour',3800],['Catedral',5200]]},
+  {n:'Hierba Luisa',v:[['Chilcano',4200],['Sour',3800],['Catedral',5200]]},
+  {n:'Canela',v:[['Chilcano',4200],['Sour',3800],['Catedral',5200]]},
+  {n:'Aguaymanto',v:[['Chilcano',4200],['Sour',3800],['Catedral',5200]]},
+  {n:'Menta',v:[['Chilcano',4200],['Sour',3800],['Catedral',5200]]},
+  {n:'Frutilla',v:[['Chilcano',4200],['Sour',3800],['Catedral',5200]]},
+]},
+{t:'Café e Infusiones',g:'bar',items:[
+  {n:'Te / Infusiones',p:1300},
+  {n:'Nescafe',p:1500},
+  {n:'Café Express',p:1500},
+  {n:'Café Cortado',p:1800},
+  {n:'Café Americano',p:1800},
+  {n:'Café con Leche',p:2000},
+  {n:'Capuccino',p:2000},
+]},
+{t:'Bajativos',g:'bar',items:[
+  {n:'Amaretto',p:3700},
+  {n:'Manzanilla',p:2500},
+  {n:'Frangelico',p:3800},
+  {n:'Araucano',p:3800},
+  {n:'Fernet',p:2900},
+  {n:'Anis del Mono',p:2800},
+  {n:'Bailey\'s',p:3600},
+  {n:'Menta',p:2400},
+  {n:'Granadina',p:2200},
+  {n:'Campari',p:2700},
+  {n:'Coñac',p:4300},
+]},
+];
+
 (function(){
-  function it(n,p,d,x){return{n:n,p:p,d:d||'',x:x||''};}
-  function sh(h){return{h:h};}
-  var TOTAL=16;
-  var pages=[
-    // 0 — Entradas
-    {t:'Entradas',sub:'Nuestra carta',rows:[
-      it('Lecho de Tigre','$7.900','Leche de tigre concentrada con mariscos frescos y ají limo'),
-      it('Papas a la Huancaína','$7.900','Papa cocida bañada en salsa de ají amarillo y queso fresco'),
-      it('Yucas Fritas con Salsa de Huancaína','$7.900','Yuca frita crujiente con salsa huancaína casera'),
-      it('Tequiños de Camarón y Queso','$8.900','Masa crocante rellena de camarones y queso, salsa ají amarillo'),
-      it('Camarones a la Parmesana','$14.900','Camarones gratinados con queso parmesano y hierbas frescas'),
-      it('Ostiones a la Parmesana y Machas','$14.900','Ostiones y machas gratinados con salsa de queso y limón'),
-    ]},
-    // 1 — Tiraditos
-    {t:'Tiraditos',sub:'Estilo nikkei',rows:[
-      it('Tiradito de Pescado','$11.900','Finas láminas de pescado fresco en leche de tigre con ají amarillo'),
-      it('Tiradito Especial','$11.900','Pescado del día en salsa especial de la casa con ají limo'),
-      it('Tiradito de Pulpo y Camarón','$14.900','Pulpo y camarón laminados en salsa de ají amarillo y aceite de oliva'),
-      it('Tiradito de Brochetas de Camarón','$14.900','Camarones en leche de tigre, aceite de sésamo y ciboulette'),
-      it('Tiradito en Salsa de Maracuyá','$14.900','Pescado fresco en salsa agridulce de maracuyá con ají limo'),
-    ]},
-    // 2 — Piqueos
-    {t:'Piqueos',sub:'Para compartir',rows:[
-      it('Piqueo Marino','$25.900','Tiradito, ceviche y causa en una sola bandeja','Para 3 personas'),
-      it('Piqueo Frío Especial','$37.900','Selección premium de mariscos fríos con salsas de la casa','Para 3 personas'),
-      it('Jalea Mixta Especial','$25.900','Mix de chicharrones de mar con yuca frita y salsa criolla','Para 2 personas'),
-      it('Maretazo Larcomar','$43.900','Gran piqueo de mariscos mixtos fritos y en leche de tigre','Para 3 personas'),
-    ]},
-    // 3 — Causas + Chicharrones
-    {t:'Causas & Chicharrones',sub:'Tradición peruana',rows:[
-      sh('Causas'),
-      it('Causa Limeña de Atún','$9.900','Papa amarilla con atún, mayonesa y ají amarillo'),
-      it('Causa Limeña de Pulpo','$11.900','Papa amarilla rellena de pulpo al olivo'),
-      it('Causa de Pulpo en Salsa Olivar','$11.900','Pulpo cocido en salsa de aceitunas y ají amarillo'),
-      it('Causa Encebollada','$10.900','Papa amarilla con cebolla encurtida y atún de mar'),
-      it('Trío de Causas','$14.900','Tres causas: atún, pulpo y camarón'),
-      sh('Chicharrones'),
-      it('Chicharrón de Pollo','$10.900','Pollo apanado y frito con papas y ensalada criolla'),
-      it('Chicharrón de Pescado','$12.900','Pescado del día apanado en harina de maíz, zarza criolla'),
-      it('Chicharrón de Calamar','$11.900','Aros de calamar fritos y crocantes'),
-      it('Chicharrón Mixto','$14.900','Combinación de pollo, pescado y calamar'),
-      it('Chicharrón de Camarón','$14.900','Camarones apanados con harina de maíz y sarsa criolla'),
-    ]},
-    // 4 — Ceviches I
-    {t:'Ceviches',sub:'Clásicos del mar',rows:[
-      it('Ceviche de Pescado','$13.900','Pescado del día marinado en limón, ají limo, cebolla morada. Choclo y camote'),
-      it('Ceviche Mixto Especial','$14.900','Pescado, calamar, pulpo y camarones en leche de tigre'),
-      it('Ceviche Larcomar','$16.900','Selección de mariscos frescos en nuestra leche de tigre especial'),
-      it('Ceviche de Pulpo','$14.900','Pulpo cocido marinado con cebolla morada y ají amarillo'),
-      it('Ceviche Criollo','$14.900','Estilo criollo con pasta de ají amarillo y hierbas frescas'),
-      it('Ceviche de Salmón y Camarón','$15.900','Salmón y camarones en leche de tigre con ciboulette'),
-    ]},
-    // 5 — Ceviches II
-    {t:'Ceviches — Especiales',sub:'Preparaciones únicas',rows:[
-      it('Festival del Ceviche','$28.900','Cuatro ceviches diferentes en una gran fuente','Para 2 personas'),
-      it('Dúo Perfecto','$15.900','Ceviche de pescado y tiradito en una misma presentación'),
-      it('Ceviche Carretillero','$15.900','Al estilo de los carretilleros limeños: picante y sin adornos'),
-      it('Ceviche Pescado Especial','$15.900','Leche de tigre madurada 24 horas, preparación de la casa'),
-    ]},
-    // 6 — Parrillas
-    {t:'Parrillas',sub:'A las brasas',rows:[
-      it('Pollo a la Parrilla','$12.900','Pechuga marinada a la brasa con papas al ajillo y ensalada'),
-      it('Lomo a la Parrilla','$14.900','Lomo fino de vacuno a las brasas con papas fritas y sarsa criolla'),
-      it('Brochetas de Pollo','$13.900','Pechuga marinada con pimientos y cebolla'),
-      it('Brochetas de Lomo','$14.900','Lomo fino con champiñones y pimientos asados'),
-      it('Pulpo a la Parrilla','$19.900','Pulpo asado a las brasas con aceite de oliva y ají panca'),
-      it('Brochetas Mixta Larcomar','$34.900','Lomo, pollo, camarón y chorizo a la parrilla','Para compartir'),
-      it('Macho Larcomar','$50.900','Gran parrillada: carnes, mariscos, embutidos y guarniciones','Para 3–4 personas'),
-    ]},
-    // 7 — Fondos I
-    {t:'Fondos',sub:'Platos de fondo',rows:[
-      it('Lomo Saltado','$14.900','Lomo fino salteado al wok con cebolla, tomate y papas fritas. Arroz blanco'),
-      it('Pollo Saltado','$14.900','Pechuga salteada al wok con verduras, soya y especias. Arroz blanco'),
-      it('Saltado de Filete','$16.900','Filete de vacuno salteado con champiñones y pimientos'),
-      it('Tallarín con Filete','$16.900','Pasta salteada con filete en salsa especial'),
-      it('Filete en Salsa de Mariscos','$18.900','Filete en salsa cremosa de camarones y calamares'),
-      it('Filete en Salsa de Champiñones','$18.900','Filete en salsa demi-glace con champiñones portobello'),
-      it('Filete Larcomar','$18.900','Filete especial de la casa con guarnición'),
-      it('Gordon Blue de Vacuno','$16.900','Filete apanado relleno de jamón y queso'),
-      it('Ají de Gallina','$14.900','Pollo desmenuzado en salsa de ají amarillo con arroz y papa cocida'),
-      it('Pollo a la Plancha','$14.900','Pechuga a la plancha con papas fritas y ensalada'),
-    ]},
-    // 8 — Fondos II (menu72)
-    {t:'Fondos — Especialidades',sub:'Platos únicos',rows:[
-      it('Pollo a la Quinua','$14.900','Pollo preparado con quinua andina y especias nativas'),
-      it('Milanesas de Cerdo','$14.900','Escalopa de cerdo apanada con limón, papas fritas y ensalada'),
-      it('Ají a la Italiana','$15.900','Preparación italiana con pasta, tomate y albahaca fresca'),
-      it('Risotto Stroganoff','$15.900','Arroz cremoso con vacuno, champiñones y crema de leche'),
-      it('Filete Salsa Romero','$18.900','Filete en salsa de romero fresco y vino tinto'),
-      it('Menú a la Moda del Chef','$18.900','Preparación del día según inspiración del chef','Consulta al mesero'),
-    ]},
-    // 9 — Pescados y Mariscos I
-    {t:'Pescados y Mariscos',sub:'Del océano a tu mesa',rows:[
-      it('Pescado al Sako Andino','$14.900','Pescado con costra de especias andinas y salsa de pisco'),
-      it('Pescado a la Criolla','$13.900','En salsa criolla de tomate, cebolla y ají amarillo'),
-      it('Pescado al Macho','$14.900','En salsa cremosa de camarones y mariscos con ají amarillo'),
-      it('Picante de Camarones','$14.900','Camarones en salsa de ají panca, tomate y cebolla. Con arroz y yuca'),
-      it('Salmón a las Finas Hierbas','$14.900','Salmón a la plancha con salsa de hierbas y limón'),
-      it('Salmón Oriental','$13.900','Salmón sellado con soya, jengibre, sésamo y cebollín'),
-      it('Trilogía Marina','$15.900','Tres preparaciones de mariscos en una fuente'),
-      it('Cao Cau de Mariscos','$13.900','Guiso de mariscos con papa y hierbabuena en salsa amarilla'),
-      it('Salmón a la Pacífico','$14.900','Salmón en salsa de mariscos con camarones y machas'),
-      it('Salmón Salsa Maracuyá','$14.900','Salmón a la plancha en salsa agridulce de maracuyá'),
-    ]},
-    // 10 — Pescados y Mariscos II
-    {t:'Pescados y Mariscos — Más',sub:'Preparaciones especiales',rows:[
-      it('Pescado a la Chorillana','$14.900','Pescado frito en salsa de cebolla, tomate y ají estilo Chorrillos'),
-      it('Pescado al Macho Gratinado','$16.900','Pescado al horno gratinado con salsa de mariscos y parmesano'),
-      it('Pescado en Salsa de Mariscos','$14.900','En salsa cremosa de camarones, calamares y mejillones'),
-      it('Pescado en Salsa de Champiñones','$14.900','A la plancha en salsa demi-glace de champiñones y crema'),
-      it('Pescado Florentino','$14.900','En salsa de espinaca, queso y nuez moscada gratinado'),
-      it('Pescado en Salsa Camarón–Champiñón','$15.900','Combinación cremosa de camarones y champiñones'),
-      it('Pescado a la Capampurrana','$14.900','Con salsa andina de ají amarillo, papa y aceitunas'),
-      it('Pescado a la Plancha','$12.900','Pescado del día a la plancha con papas y ensalada'),
-    ]},
-    // 11 — Arroces
-    {t:'Arroces',sub:'Tradición andina y chifa',rows:[
-      it('Arroz con Mariscos','$15.900','Arroz meloso con mix de mariscos en salsa de ají amarillo'),
-      it('Arroz con Camarones','$15.900','Arroz caldoso con camarones, ají amarillo y cilantro'),
-      it('Arroz Chaufa de Lomo','$14.900','Chaufa con lomo saltado, huevo y verduras al wok'),
-      it('Arroz Chaufa de Pollo','$14.900','Con pollo salteado, huevo y salsa de soya'),
-      it('Arroz Chaufa con Mariscos','$15.900','Mix de mariscos, huevo y especias orientales'),
-      it('Arroz Chaufa 3 Sabores','$15.900','Pollo, lomo y mariscos. El más completo'),
-      it('Risotto de Camarón y Champiñones','$14.900','Arroz arbóreo cremoso con camarones y champiñones'),
-      it('Risotto de Lomo Saltado','$14.900','Risotto inspirado en el clásico lomo saltado'),
-      it('Risotto Salmón','$14.900','Risotto cremoso con salmón y eneldo fresco'),
-      it('Risotto Larcomar','$15.900','Con mariscos mixtos y azafrán'),
-    ]},
-    // 12 — Pastas
-    {t:'Pastas',sub:'Fusión italo-peruana',rows:[
-      it('Fettucini Vegetariano','$9.900','Vegetales salteados, albahaca fresca y aceite de oliva'),
-      it('Fettucini en Salsa Alfredo','$9.900','Salsa blanca cremosa de parmesano y mantequilla'),
-      it('Fettucini con Pollo','$14.900','Pechuga de pollo salteada en salsa de la casa'),
-      it('Fettucini con Filete','$14.900','Filete en salsa demi-glace y hierbas frescas'),
-      it('Fettucini Camarón y Champiñón','$14.900','Salsa cremosa de camarones y champiñones con toque de ají'),
-      it('Fettucini Huancaína con Lomo','$14.900','Salsa huancaína con lomo saltado — fusión peruano-italiana'),
-      it('Fettucini al Pesto con Lomo','$14.900','Pesto de albahaca con lomo saltado y tomates cherry'),
-      it('Fideua de Camarones','$14.900','Fideos finos con camarones frescos al estilo mediterráneo'),
-      it('Fideua a la Campesina','$14.900','Fideos con vegetales de temporada y chorizo'),
-    ]},
-    // 13 — Sopas + Pollos
-    {t:'Sopas & Pollos a la Brasa',sub:'Calor y sabor peruano',rows:[
-      sh('Sopas'),
-      it('Dieta de Pollo','$7.900','Caldo de pollo casero con verduras, fideos y pollo desmenuzado'),
-      it('Sopa a la Minuta','$8.900','Caldo de res con fideos, leche y huevo'),
-      it('Parihuela','$14.900','Sopa marinera con mix de mariscos y pescado del día'),
-      it('Chupe de Pescado','$14.900','Sopa cremosa de pescado con papas, choclo y leche evaporada'),
-      it('Chupe de Camarón','$15.900','Sopa tradicional de camarones con papas y crema'),
-      it('Sudado Especial','$16.900','Pescado al vapor en salsa criolla con tomate y ají amarillo'),
-      sh('Pollos a la Brasa'),
-      it('1 Pollo + Papas + Ensalada','$25.900','Pollo entero a la brasa con papas y ensalada mixta','Pollo entero'),
-      it('½ Pollo + Papas + Ensalada','$15.900','Medio pollo a la brasa con papas y ensalada','Medio pollo'),
-      it('Setchipapa','$8.900','Papas fritas con pollo a la brasa y salsa huancaína'),
-      it('Macho Larcomar','$12.900','Pollo a la brasa con arroz chaufa y ensalada criolla'),
-    ]},
-    // 14 — Guarniciones + Bebidas
-    {t:'Guarniciones & Bebidas',sub:'Para acompañar',rows:[
-      sh('Guarniciones'),
-      it('Arroz Blanco','$3.200'),it('Papas Fritas','$5.500'),
-      it('Panaché de Verduras','$4.900'),it('Cancha Paccho','$2.900'),
-      it('Choclo Peruano','$4.900'),it('Zarza Criolla','$2.900'),
-      it('Puré de Papas','$4.900'),it('Ensalada Surtida','$4.900'),
-      it('Ensalada Mixta Especial','$5.900'),
-      sh('Bebidas & Cafés'),
-      it('Jugos Naturales del Día','$1.700','Variedad de frutas de temporada'),
-      it('Bebidas Individuales 350ml','$1.900','Inka Kola · Coca Cola · Sprite · Néctar'),
-      it('Bebidas Familiares 1L','$3.900','Inka Kola · Coca Cola · Sprite · Fanta'),
-      it('Agua Mineral','$1.300'),it('Limonada','$2.500'),
-      it('Café (Cortado / Americano / Espresso)','$2.100'),
-      it('Café con Leche','$2.200'),it('Té e Infusiones','$1.900'),
-    ]},
-    // 15 — Aperitivos + Postres
-    {t:'Aperitivos & Postres',sub:'El broche de oro',rows:[
-      sh('Pisco Sour'),
-      it('Clásico','$7.900','Pisco quebranta, limón, jarabe de goma, clara de huevo y angostura'),
-      it('Sour Fuerte','$7.900','Versión con más pisco, para quienes gustan sentirlo'),
-      it('Sour de Sabores','$8.900','Maracuyá, frutilla, mango o chicha morada','Pregunta por el sabor del día'),
-      sh('Coctelería Larcomar'),
-      it('Coctel Larcomar','$8.900','Pisco, maracuyá y toque secreto de la casa'),
-      it('Piña Colada','$8.900','Ron, piña natural y coco'),
-      it('Mojito Clásico','$7.900','Ron blanco, menta fresca, limón y agua con gas'),
-      it('Mojito Larcomar','$8.900','Pisco con frutillas frescas y menta'),
-      it('Caipiróska','$7.900','Vodka premium con frutos frescos macerados'),
-      sh('Macerado de Pisco & Postres'),
-      it('Macerado Clásico','$5.900','Pisco macerado con frutas y hierbas andinas'),
-      it('Chilcano','$5.900','Pisco, ginger ale, limón y amargo de angostura'),
-      it('Crema Volteada','$5.900','Flan peruano casero con caramelo artesanal'),
-      it('Torta Tres Leches','$6.900','Bizcocho empapado en tres leches con chantilly'),
-      it('Mousse de Maracuyá','$5.900','Mousse cremoso con coulis de frutos rojos'),
-      it('Helado (3 sabores)','$5.900','Selección artesanal del día'),
-    ]},
-  ];
+  var LOGO='imagenes/logo.png';
+  function peso(v){return '$'+Number(v).toLocaleString('es-CL');}
+  function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
 
-  var cats=[
-    {t:'Entradas',p:0},{t:'Tiraditos',p:1},{t:'Piqueos',p:2},{t:'Causas',p:3},
-    {t:'Ceviches',p:4},{t:'Parrillas',p:6},{t:'Fondos',p:7},
-    {t:'Pescados',p:9},{t:'Arroces',p:11},{t:'Pastas',p:12},
-    {t:'Sopas',p:13},{t:'Guarniciones',p:14},{t:'Aperitivos',p:15}
-  ];
-
-  function renderPage(idx){
-    if(idx<0||idx>=pages.length) return '';
-    var pg=pages[idx];
-    var h='<div class="mp-wrap"><div class="mp-title">'+pg.t+'</div>';
-    h+='<div class="mp-divider"><span>'+(pg.sub||'Larcomar')+'</span></div>';
-    h+='<div class="mp-items-block">';
-    pg.rows.forEach(function(r){
-      if(r.h){
-        h+='<div class="mp-subhead">'+r.h+'</div>';
-      } else {
-        h+='<div class="mp-item"><div class="mp-left"><div class="mp-name">'+r.n+'</div>';
-        if(r.d) h+='<div class="mp-desc">'+r.d+'</div>';
-        if(r.x) h+='<div class="mp-note">'+r.x+'</div>';
-        h+='</div><div class="mp-price">'+r.p+'</div></div>';
-      }
-    });
-    h+='</div>';
-    h+='<div class="mp-footer"><div class="mp-footer-brand">Larcomar</div><div class="mp-footer-flag"><span></span><span></span><span></span></div></div>';
-    return h+'</div>';
+  function itemHTML(it){
+    var left='<div class="mp-left"><div class="mp-name">'+esc(it.n)+'</div>';
+    if(it.d) left+='<div class="mp-desc">'+esc(it.d)+'</div>';
+    if(it.v){
+      left+='<div class="mp-varrow">'+it.v.map(function(x){
+        return '<span class="mp-chip">'+esc(x[0])+' <b>'+peso(x[1])+'</b></span>';}).join('')+'</div>';
+    }
+    left+='</div>';
+    var right = it.v ? '' : '<div class="mp-dots"></div><div class="mp-price">'+peso(it.p)+'</div>';
+    return '<div class="mp-item">'+left+right+'</div>';
   }
 
-  var cur=0;
-  var mob=function(){return window.innerWidth<=720;};
-  var pL=document.getElementById('bvPageL');
-  var pR=document.getElementById('bvPageR');
-  var titleEl=document.getElementById('bvTitle');
-  var countEl=document.getElementById('bvCur');
-  var prevBtn=document.getElementById('bvPrev');
-  var nextBtn=document.getElementById('bvNext');
-
-  function go(idx){
-    cur=Math.max(0,Math.min(idx,pages.length-1));
-    pL.classList.add('fading'); pR.classList.add('fading');
-    setTimeout(function(){
-      pL.innerHTML=renderPage(cur);
-      pL.scrollTop=0;
-      var n=cur+1;
-      if(!mob()&&n<pages.length){
-        pR.innerHTML=renderPage(n);
-        pR.scrollTop=0;
-        pR.style.display='';
-        titleEl.textContent=pages[cur].t+' · '+pages[n].t;
-        countEl.textContent=(cur+1)+'–'+(n+1);
-      } else {
-        pR.innerHTML='';
-        pR.style.display='none';
-        titleEl.textContent=pages[cur].t;
-        countEl.textContent=String(cur+1);
-      }
-      prevBtn.disabled=cur===0;
-      nextBtn.disabled=mob()?cur>=TOTAL-1:cur>=TOTAL-2;
-      document.querySelectorAll('.bv-cat').forEach(function(b){
-        var p=parseInt(b.dataset.p);
-        b.classList.toggle('active',p===cur||(!mob()&&p===cur+1));
-      });
-      pL.classList.remove('fading'); pR.classList.remove('fading');
-    },180);
-  }
-
-  var catsEl=document.getElementById('bvCats');
-  cats.forEach(function(c){
-    var b=document.createElement('button');
-    b.className='bv-cat'; b.dataset.p=c.p; b.textContent=c.t;
-    b.addEventListener('click',function(){
-      var p=parseInt(this.dataset.p);
-      if(!mob()&&p%2!==0) p=Math.max(0,p-1);
-      go(p);
-    });
-    catsEl.appendChild(b);
+  var blocks=[];
+  CARTA.forEach(function(sec,si){
+    blocks.push({type:'head',t:sec.t,g:sec.g,si:si});
+    sec.items.forEach(function(it){blocks.push({type:'item',it:it,sec:sec.t,g:sec.g,si:si});});
   });
+  function pesoBloque(b){
+    if(b.type==='head') return 1.5;
+    if(b.type==='cont') return 1.25;
+    var w = b.it.d ? 1.05 : 0.5;
+    if(b.it.v) w += 0.55;
+    return w;
+  }
+  function paginar(maxW){
+    var pages=[],cur=[],curW=0;
+    function push(){ if(cur.length){pages.push(cur);cur=[];curW=0;} }
+    blocks.forEach(function(b){
+      var w=pesoBloque(b);
+      if(b.type==='head' && curW>0 && curW+w > maxW-1.1){ push(); }
+      if(curW+w>maxW && cur.length){
+        push();
+        if(b.type==='item'){ cur.push({type:'cont',t:b.sec,g:b.g}); curW+=1.25; }
+      }
+      cur.push(b); curW+=w;
+    });
+    push();
+    return pages;
+  }
+  function grupoLabel(g){return g==='bar'?'Bar · Bebidas':'Cocina Peruana';}
+  function renderPage(blocksOfPage, faceNum){
+    var first=blocksOfPage[0];
+    var run = first.g==='bar' ? 'Bar · Bebidas · Larcomar' : 'Larcomar · San Felipe';
+    var h='<div class="page-inner"><div class="page-runhead">'+run+'</div><div class="page-body">';
+    blocksOfPage.forEach(function(b){
+      if(b.type==='head'){
+        h+='<div class="mp-secttl">'+esc(b.t)+'</div><div class="mp-sectsub"><span>'+grupoLabel(b.g)+'</span></div>';
+      } else if(b.type==='cont'){
+        h+='<div class="mp-secttl cont">'+esc(b.t)+' <span style="font-size:.7em;font-style:italic">(cont.)</span></div>';
+      } else {
+        h+=itemHTML(b.it);
+      }
+    });
+    h+='</div><div class="page-foot"><span class="page-foot-brand">Larcomar</span><span class="page-num">'+faceNum+'</span></div></div>';
+    return h;
+  }
+  var coverHTML='<div class="cover"><div class="cover-inner">'
+    +'<img class="cover-logo" src="'+LOGO+'" alt="Larcomar — Restaurante Peruano">'
+    +'<div class="cover-script">Carta</div>'
+    +'<div class="cover-rule">Cocina Peruana</div>'
+    +'<div class="cover-flag"><span></span><span></span><span></span></div>'
+    +'</div><div class="cover-hint">Toca para abrir ›</div></div>';
+  var backHTML='<div class="backcover"><div class="bc-inner">'
+    +'<div class="cover-script">¡Gracias!</div>'
+    +'<div class="bc-thanks">Buen provecho</div>'
+    +'<div class="cover-flag"><span></span><span></span><span></span></div>'
+    +'<div class="bc-meta">LARCOMAR · Cocina Peruana<br>San Felipe · Valle de Aconcagua<br>@larcomar</div>'
+    +'</div></div>';
 
-  prevBtn.addEventListener('click',function(){go(mob()?cur-1:cur-2);});
-  nextBtn.addEventListener('click',function(){go(mob()?cur+1:cur+2);});
+  var faces=[], faceMeta=[], catFirstFace={}, catOrder=[];
+  function build(maxW){
+    faces=[coverHTML]; faceMeta=[{label:'Portada'}]; catFirstFace={}; catOrder=[];
+    var pages=paginar(maxW);
+    pages.forEach(function(pg){
+      var fnum=faces.length;
+      faces.push(renderPage(pg,fnum));
+      var headBlock=null;
+      pg.forEach(function(b){ if((b.type==='head') && !headBlock) headBlock=b; });
+      var lbl = headBlock ? headBlock.t : (pg[0].type==='cont'?pg[0].t:'');
+      faceMeta.push({label:lbl,g:pg[0].g});
+      pg.forEach(function(b){
+        if(b.type==='head' && catFirstFace[b.t]===undefined){
+          catFirstFace[b.t]=faces.length-1; catOrder.push({t:b.t,g:b.g});
+        }
+      });
+    });
+    faces.push(backHTML); faceMeta.push({label:'Contraportada'});
+    if(faces.length%2!==0){
+      var blank='<div class="page-inner"><div class="page-runhead">Larcomar</div><div class="page-body"></div><div class="page-foot"><span class="page-foot-brand">Larcomar</span><span class="page-num"></span></div></div>';
+      faces.splice(faces.length-1,0,blank);
+      faceMeta.splice(faceMeta.length-1,0,{label:''});
+    }
+  }
 
+  var album=document.getElementById('album');
+  var stage=document.getElementById('albumStage');
+  var prevBtn=document.getElementById('bvPrev'), nextBtn=document.getElementById('bvNext');
+  var titleEl=document.getElementById('bvTitle'), countEl=document.getElementById('bvCount');
+  var catsEl=document.getElementById('bvCats');
+  if(!album) return;
+  var leaves=[], N=0, c=0, animating=false;
+
+  function mountDesktop(){
+    album.innerHTML=''; leaves=[];
+    N=faces.length/2;
+    for(var i=0;i<N;i++){
+      var leaf=document.createElement('div'); leaf.className='leaf';
+      var f=document.createElement('div'); f.className='face front'; f.innerHTML=faces[2*i];
+      var b=document.createElement('div'); b.className='face back'; b.innerHTML=faces[2*i+1];
+      leaf.appendChild(f); leaf.appendChild(b); album.appendChild(leaf); leaves.push(leaf);
+    }
+    c=0; applyState(null); buildCats();
+  }
+  function updateZ(anim){
+    leaves.forEach(function(l,i){ l.style.zIndex = (i<c)?(i+1):(N-i); });
+    if(anim!=null && leaves[anim]) leaves[anim].style.zIndex=N+6;
+  }
+  function shift(){ album.style.transform='translateX('+((c<=0)?'-25%':(c>=N?'25%':'0%'))+')'; }
+  function meta(){
+    var lbl,cnt;
+    if(c<=0){lbl='Portada';cnt='Toca la portada para abrir';}
+    else if(c>=N){lbl='Contraportada';cnt='';}
+    else{
+      var L=faceMeta[2*c-1]?faceMeta[2*c-1].label:'', R=faceMeta[2*c]?faceMeta[2*c].label:'';
+      var arr=[]; if(L)arr.push(L); if(R&&R!==L)arr.push(R);
+      lbl=arr.join(' · ')||'Carta'; cnt='Páginas '+(2*c-1)+'–'+(2*c)+' de '+(faces.length-2);
+    }
+    titleEl.textContent=lbl; countEl.textContent=cnt;
+    if(catsEl){[].forEach.call(catsEl.children,function(btn){
+      var f=+btn.dataset.f; btn.classList.toggle('active', f>=(2*c-1)&&f<=(2*c)&&c>0);
+    });}
+  }
+  function applyState(anim){ leaves.forEach(function(l,i){l.classList.toggle('flipped',i<c);}); updateZ(anim); shift(); meta();
+    prevBtn.disabled=c<=0; nextBtn.disabled=c>=N; }
+  function next(){ if(animating||c>=N) return; animating=true; var m=c; leaves[m].classList.add('flipped'); c++; updateZ(m); shift(); meta(); prevBtn.disabled=c<=0; nextBtn.disabled=c>=N; setTimeout(function(){updateZ();animating=false;},500); }
+  function prev(){ if(animating||c<=0) return; animating=true; c--; var m=c; leaves[m].classList.remove('flipped'); updateZ(m); shift(); meta(); prevBtn.disabled=c<=0; nextBtn.disabled=c>=N; setTimeout(function(){updateZ();animating=false;},500); }
+  function goLeaf(target){ target=Math.max(0,Math.min(target,N)); c=target; applyState(null); }
+  function buildCats(){
+    catsEl.innerHTML='';
+    catOrder.forEach(function(cat){
+      var f=catFirstFace[cat.t];
+      var targetC=Math.floor((f+1)/2);
+      var btn=document.createElement('button'); btn.className='bv-cat'; btn.textContent=cat.t; btn.dataset.f=f;
+      btn.addEventListener('click',function(){ goLeaf(targetC); if(mIsOn()) goM(f); });
+      catsEl.appendChild(btn);
+    });
+  }
+  prevBtn.addEventListener('click',prev);
+  nextBtn.addEventListener('click',next);
+  stage.addEventListener('click',function(e){
+    var r=stage.getBoundingClientRect(); var x=e.clientX-r.left;
+    if(c===0){ next(); return; }
+    if(x> r.width*0.5) next(); else prev();
+  });
   var tx=0;
-  document.getElementById('bvBook').addEventListener('touchstart',function(e){tx=e.touches[0].clientX;},{passive:true});
-  document.getElementById('bvBook').addEventListener('touchend',function(e){
-    var dx=e.changedTouches[0].clientX-tx;
-    if(Math.abs(dx)>40){dx<0?go(mob()?cur+1:cur+2):go(mob()?cur-1:cur-2);}
-  },{passive:true});
+  stage.addEventListener('touchstart',function(e){tx=e.touches[0].clientX;},{passive:true});
+  stage.addEventListener('touchend',function(e){var dx=e.changedTouches[0].clientX-tx; if(Math.abs(dx)>40){dx<0?next():prev();}},{passive:true});
 
-  window.addEventListener('resize',function(){go(cur);});
-  go(0);
+  var mbook=document.getElementById('mbook'), mTop=document.getElementById('mTop'), mUnder=document.getElementById('mUnder');
+  var mPrev=document.getElementById('mPrev'), mNext=document.getElementById('mNext');
+  var mi=0, mAnim=false;
+  function mIsOn(){return window.matchMedia('(max-width:820px)').matches;}
+  function mRender(){ mTop.innerHTML=faces[mi]; mUnder.innerHTML=''; mMeta(); }
+  function mMeta(){
+    var fm=faceMeta[mi]||{}; titleEl.textContent=fm.label||'Carta';
+    countEl.textContent = (mi===0)?'Toca para abrir':(mi>=faces.length-1?'':'Página '+mi+' de '+(faces.length-2));
+    mPrev.disabled=mi<=0; mNext.disabled=mi>=faces.length-1;
+    if(catsEl){[].forEach.call(catsEl.children,function(btn){btn.classList.toggle('active',+btn.dataset.f===mi);});}
+  }
+  function mNextF(){ if(mAnim||mi>=faces.length-1) return; mAnim=true; mUnder.innerHTML=faces[mi+1]; mTop.classList.add('turn');
+    setTimeout(function(){ mi++; mTop.classList.remove('turn'); mTop.style.transition='none'; mTop.innerHTML=faces[mi]; void mTop.offsetWidth; mTop.style.transition=''; mUnder.innerHTML=''; mMeta(); mAnim=false; },560); }
+  function mPrevF(){ if(mAnim||mi<=0) return; mAnim=true; mUnder.innerHTML=faces[mi]; mTop.innerHTML=faces[mi-1]; mTop.style.transition='none'; mTop.classList.add('turn'); void mTop.offsetWidth; mTop.style.transition=''; mTop.classList.remove('turn');
+    setTimeout(function(){ mi--; mUnder.innerHTML=''; mMeta(); mAnim=false; },560); }
+  function goM(f){ mi=Math.max(0,Math.min(f,faces.length-1)); mRender(); }
+  if(mNext){ mNext.addEventListener('click',mNextF); mPrev.addEventListener('click',mPrevF);
+    mbook.addEventListener('click',function(e){ if(mi===0){mNextF();return;} var r=mbook.getBoundingClientRect(); (e.clientX-r.left> r.width*0.5)?mNextF():mPrevF(); });
+    var mtx=0; mbook.addEventListener('touchstart',function(e){mtx=e.touches[0].clientX;},{passive:true});
+    mbook.addEventListener('touchend',function(e){var dx=e.changedTouches[0].clientX-mtx; if(Math.abs(dx)>40){dx<0?mNextF():mPrevF();}},{passive:true});
+  }
+
+  function init(){
+    build(mIsOn()?7.6:6.3);
+    mountDesktop();
+    mi=0; mRender();
+  }
+  var rt;
+  window.addEventListener('resize',function(){ clearTimeout(rt); rt=setTimeout(init,250); });
+  init();
 })();
 
 // BEBIDAS — SCROLL COLUMNS PAUSE ON HOVER (solo en dispositivos con mouse;
