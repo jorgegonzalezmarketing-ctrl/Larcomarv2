@@ -75,8 +75,10 @@ body{background:var(--cream);color:var(--brown);font-family:var(--font-body);fon
 /* NAVBAR */
 nav{position:fixed;top:0;left:0;right:0;z-index:500;padding:0 5%;display:flex;align-items:center;justify-content:space-between;height:68px;transition:background .4s,box-shadow .4s}
 nav.scrolled{background:rgba(251,245,232,.97);box-shadow:0 2px 20px rgba(62,32,16,.1);backdrop-filter:blur(8px)}
-.nav-logo{font-family:var(--font-display);font-size:1.5rem;color:var(--warm-white);letter-spacing:2px;text-decoration:none;transition:color .2s}
-nav.scrolled .nav-logo{color:var(--burgundy)}
+.nav-logo{display:inline-flex;align-items:center;height:100%;text-decoration:none}
+.nav-logo-img{height:48px;width:auto;display:block;filter:drop-shadow(0 2px 7px rgba(0,0,0,.5));transition:filter .3s}
+nav.scrolled .nav-logo-img{filter:drop-shadow(0 1px 3px rgba(0,0,0,.18))}
+@media(max-width:768px){.nav-logo-img{height:42px}}
 .nav-links{display:flex;gap:2rem;list-style:none}
 .nav-links a{font-size:.78rem;letter-spacing:1.5px;text-transform:uppercase;color:rgba(251,245,232,.85);text-decoration:none;transition:color .2s;font-weight:400}
 nav.scrolled .nav-links a{color:var(--brown)}
@@ -183,29 +185,23 @@ nav.scrolled .hamburger span{background:var(--brown)}
 @media(max-width:900px){.exp-grid{grid-template-columns:1fr}.exp-img-accent{display:none}.exp-badge{left:1rem}}
 @media(max-width:600px){.exp-pillars{grid-template-columns:1fr}}
 
-/* GALLERY HOVER SLIDESHOW */
+/* GALLERY · EXPANDING */
 #gallery{padding:5rem 8% 6rem;background:var(--parchment)}
-.gallery-header{text-align:center;margin-bottom:3.5rem}
-.hs-body{display:flex;align-items:center;justify-content:space-between;gap:5rem}
-.hs-list{flex:0 0 auto;display:flex;flex-direction:column;gap:0}
-.hs-row{display:flex;align-items:baseline;gap:1rem;cursor:pointer;padding:.45rem 0;border-bottom:1px solid rgba(62,32,16,.1);transition:padding-left .25s var(--ease-out)}
-.hs-row:first-child{border-top:1px solid rgba(62,32,16,.1)}
-.hs-num{font-size:.62rem;font-family:var(--font-body);letter-spacing:2px;color:var(--muted);opacity:.35;flex-shrink:0;width:2.2ch;transition:opacity .3s}
-.hs-row.active .hs-num,.hs-row:hover .hs-num{opacity:.85}
-.hs-title{font-family:var(--font-display);font-size:clamp(1.85rem,3vw,2.9rem);font-weight:700;text-transform:uppercase;letter-spacing:-.02em;line-height:1.15;display:inline-block;white-space:nowrap;color:var(--espresso)}
-.hs-char{display:inline-block;overflow:hidden;position:relative;vertical-align:top}
-.hs-orig{display:inline-block;opacity:.28;transition:transform .3s cubic-bezier(.25,.46,.45,.94),opacity .3s;will-change:transform}
-.hs-copy{position:absolute;top:0;left:0;display:inline-block;transform:translateY(110%);transition:transform .3s cubic-bezier(.25,.46,.45,.94);will-change:transform}
-.hs-images{flex:0 0 440px;height:480px;border-radius:5px;overflow:hidden;display:grid;box-shadow:0 20px 60px rgba(30,15,5,.16)}
-.hs-images>div{grid-column:1;grid-row:1;width:100%;height:100%}
-.hs-img{width:100%;height:100%;object-fit:cover;display:block;clip-path:polygon(0% 0%,100% 0%,100% 0%,0% 0%);transition:clip-path .8s cubic-bezier(.33,1,.68,1)}
-.hs-img.active{clip-path:polygon(0% 0%,100% 0%,100% 100%,0% 100%)}
-@media(max-width:960px){.hs-images{flex:0 0 360px;height:420px}}
+.gallery-header{text-align:center;margin-bottom:3rem}
+.gallery-sub{color:var(--muted);font-size:.95rem;max-width:520px;margin:.7rem auto 0;line-height:1.7}
+.eg-wrap{display:flex;gap:12px;height:460px;max-width:1180px;margin:0 auto}
+.eg-item{position:relative;flex:1;min-width:0;border-radius:14px;overflow:hidden;cursor:pointer;transition:flex .6s var(--ease-out);box-shadow:0 14px 40px rgba(30,15,5,.18)}
+.eg-item img{width:100%;height:100%;object-fit:cover;object-position:center;display:block;transition:transform .8s var(--ease-out)}
+.eg-item::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(30,15,5,.4),transparent 42%);opacity:.6;transition:opacity .5s;pointer-events:none}
+.eg-item:hover{flex:5.5}
+.eg-item:hover img{transform:scale(1.05)}
+.eg-item:hover::after{opacity:.28}
+@media(hover:hover){.eg-wrap:hover .eg-item:not(:hover){flex:.7}}
 @media(max-width:768px){
-  .hs-body{flex-direction:column-reverse;gap:2rem}
-  .hs-images{width:100%;flex:none;height:380px}
-  .hs-title{font-size:clamp(1.35rem,5.5vw,2rem)}
-  .hs-list{width:100%}
+  .eg-wrap{display:grid;grid-template-columns:1fr 1fr;gap:10px;height:auto;max-width:560px}
+  .eg-item{height:44vw;max-height:240px;flex:none!important}
+  .eg-item img{transition:none}
+  .eg-item::after{opacity:.4}
 }
 
 /* LIGHTBOX */
@@ -587,7 +583,7 @@ footer{background:var(--espresso);padding:4rem 8% 2rem}
 </div>
 
 <nav id="navbar" role="navigation" aria-label="Navegación principal">
-  <a href="#hero" class="nav-logo">LARCOMAR</a>
+  <a href="#hero" class="nav-logo" aria-label="Larcomar — inicio"><img class="nav-logo-img" src="imagenes/logo.png" alt="Larcomar — Restaurante Peruano" width="48" height="49"></a>
   <ul class="nav-links">
     <li><a href="#experience">Nosotros</a></li>
     <li><a href="#gallery">Galería</a></li>
@@ -698,27 +694,14 @@ footer{background:var(--espresso);padding:4rem 8% 2rem}
     <div class="section-label">Galería</div>
     <h2 class="section-title">El arte en el <em>plato</em></h2>
   </div>
-  <div class="hs-body reveal">
-    <div class="hs-list">
-      <div class="hs-row" data-src="imagenes/Lancomar 1.jpg" data-alt="Causa limeña con camarones"><span class="hs-num">01</span><span class="hs-title" data-text="Causa limeña"></span></div>
-      <div class="hs-row" data-src="imagenes/Lancomar 5.jpg" data-alt="Lomo saltado mar y tierra"><span class="hs-num">02</span><span class="hs-title" data-text="Lomo saltado"></span></div>
-      <div class="hs-row" data-src="imagenes/Lancomar 10.jpg" data-alt="Salmón a la plancha"><span class="hs-num">03</span><span class="hs-title" data-text="Salmón a la plancha"></span></div>
-      <div class="hs-row" data-src="imagenes/Lancomar 8.jpg" data-alt="Pulpo a la plancha con verduras"><span class="hs-num">04</span><span class="hs-title" data-text="Pulpo a la plancha"></span></div>
-      <div class="hs-row" data-src="imagenes/Lancomar 15.jpg" data-alt="Seco de cordero"><span class="hs-num">05</span><span class="hs-title" data-text="Seco de cordero"></span></div>
-      <div class="hs-row" data-src="imagenes/gal-suspiro.jpg" data-alt="Suspiro limeño con crema batida"><span class="hs-num">06</span><span class="hs-title" data-text="Suspiro limeño"></span></div>
-      <div class="hs-row" data-src="imagenes/gal-coctel.jpg" data-alt="Cóctel azul especial Larcomar"><span class="hs-num">07</span><span class="hs-title" data-text="Cóctel especial"></span></div>
-      <div class="hs-row" data-src="imagenes/gal-cheesecake.jpg" data-alt="Cheesecake de lima con crema"><span class="hs-num">08</span><span class="hs-title" data-text="Cheesecake de lima"></span></div>
-    </div>
-    <div class="hs-images" aria-hidden="true">
-      <div><img class="hs-img" src="imagenes/Lancomar 1.jpg" alt="Causa limeña con camarones" loading="eager"></div>
-      <div><img class="hs-img" src="imagenes/Lancomar 5.jpg" alt="Lomo saltado mar y tierra" loading="lazy"></div>
-      <div><img class="hs-img" src="imagenes/Lancomar 10.jpg" alt="Salmón a la plancha" loading="lazy"></div>
-      <div><img class="hs-img" src="imagenes/Lancomar 8.jpg" alt="Pulpo a la plancha con verduras" loading="lazy"></div>
-      <div><img class="hs-img" src="imagenes/Lancomar 15.jpg" alt="Seco de cordero" loading="lazy"></div>
-      <div><img class="hs-img" src="imagenes/gal-suspiro.jpg" alt="Suspiro limeño con crema batida" loading="lazy" style="object-fit:contain;background:#15110a"></div>
-      <div><img class="hs-img" src="imagenes/gal-coctel.jpg" alt="Cóctel azul especial Larcomar" loading="lazy"></div>
-      <div><img class="hs-img" src="imagenes/gal-cheesecake.jpg" alt="Cheesecake de lima con crema" loading="lazy" style="object-fit:contain;background:#080808"></div>
-    </div>
+  <p class="gallery-sub reveal">Pasa el cursor —o toca— una foto para verla en grande. Una muestra real de lo que servimos cada día.</p>
+  <div class="eg-wrap reveal">
+    <div class="eg-item" onclick="openLb('imagenes/gal2-1.jpg','Plato de la cocina peruana de Larcomar')"><img src="imagenes/gal2-1.jpg" alt="Plato de fondo de la cocina peruana de Larcomar, San Felipe" loading="lazy"></div>
+    <div class="eg-item" onclick="openLb('imagenes/gal2-2.jpg','Plato de autor de Larcomar')"><img src="imagenes/gal2-2.jpg" alt="Plato de autor emplatado en Larcomar, San Felipe" loading="lazy"></div>
+    <div class="eg-item" onclick="openLb('imagenes/gal2-3.jpg','Especialidad de la casa en Larcomar')"><img src="imagenes/gal2-3.jpg" alt="Especialidad de la casa servida en Larcomar, San Felipe" loading="lazy"></div>
+    <div class="eg-item" onclick="openLb('imagenes/gal2-4.jpg','Piqueo peruano para compartir en Larcomar')"><img src="imagenes/gal2-4.jpg" alt="Piqueo peruano para compartir en Larcomar, San Felipe" loading="lazy"></div>
+    <div class="eg-item" onclick="openLb('imagenes/gal2-5.jpg','Plato de arroz peruano de Larcomar')"><img src="imagenes/gal2-5.jpg" alt="Plato de arroz peruano de la cocina de Larcomar, San Felipe" loading="lazy"></div>
+    <div class="eg-item" onclick="openLb('imagenes/gal2-6.jpg','Postre de la casa en Larcomar')"><img src="imagenes/gal2-6.jpg" alt="Postre de la casa de Larcomar, San Felipe" loading="lazy"></div>
   </div>
 </section>
 
